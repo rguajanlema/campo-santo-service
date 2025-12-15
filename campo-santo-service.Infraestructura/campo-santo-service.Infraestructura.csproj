@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>campo_santo_service.Infraestructura</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\campo-santo-service.Aplicacion\campo-santo-service.Aplicacion.csproj" />
+    <ProjectReference Include="..\campo-santo-service.Dominio\campo-santo-service.Dominio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Adaptadores\" />
+    <Folder Include="Mappers\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/API/">
+    <Project Path="campo-santo-service.API/campo-santo-service.API.csproj" Id="63e476cd-fb23-4d0e-ae6a-048f902684d6" />
+  </Folder>
+  <Folder Name="/Core/">
+    <Project Path="campo-santo-service.Aplicacion/campo-santo-service.Aplicacion.csproj" />
+    <Project Path="campo-santo-service.Dominio/campo-santo-service.Dominio.csproj" />
+  </Folder>
+  <Folder Name="/Infraestructura/">
+    <Project Path="campo-santo-service.Infraestructura/campo-santo-service.Infraestructura.csproj" Id="2e9be67c-3db9-43b0-802d-a5174b721ead" />
+  </Folder>
+  <Folder Name="/Pruebas/">
+    <Project Path="campo-santo-service.Pruebas/campo-santo-service.Pruebas.csproj" />
+  </Folder>
+</Solution>

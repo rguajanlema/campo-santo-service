@@ -1,0 +1,67 @@
+﻿using campo_santo_service.Dominio.Enums;
+using campo_santo_service.Dominio.Excepciones;
+using campo_santo_service.Dominio.ObjetosDeValor;
+
+namespace campo_santo_service.Dominio.Entidades
+{
+    public class Espacio
+    {
+        public Guid Id { get; private set; }
+        public CodigoContrato Codigo { get; private set; } = null!;
+        public EstadoTipo Tipo { get; private set; }
+        public NivelesPiso Piso { get; private set; }
+        public EstadoEspacio Estado { get; private set; }
+        public string Ubicacion { get; private set; } = null!;
+
+        internal Espacio(Guid id, CodigoContrato codigo, EstadoTipo tipo,NivelesPiso piso, EstadoEspacio estado, string ubicacion) { 
+            if(codigo == null)
+            {
+                throw new ExcepcionDeReglaDeNegocio($"El {nameof(codigo)} es obligatorio");
+            }
+            if (string.IsNullOrWhiteSpace(ubicacion))
+            {
+                throw new ExcepcionDeReglaDeNegocio($"El {nameof(ubicacion)} es obligatorio");
+            }
+
+            Id = id;
+            Codigo = codigo;
+            Ubicacion = ubicacion;
+            Piso = piso;
+            Estado = estado;
+            Tipo = tipo;
+        }
+        public void AgregarPiso()
+        {
+            if (Piso == NivelesPiso.TercerPiso)
+                throw new ExcepcionDeReglaDeNegocio("No se puede agregar un cuarto piso");
+
+            Piso = Piso switch
+            {
+                NivelesPiso.SubSuelo => NivelesPiso.PlantaBaja,
+                NivelesPiso.PlantaBaja => NivelesPiso.PrimerPiso,
+                NivelesPiso.PrimerPiso => NivelesPiso.SegundoPiso,
+                NivelesPiso.SegundoPiso => NivelesPiso.TercerPiso,
+                _ => Piso
+            };
+            
+            Estado = EstadoEspacio.Disponible;
+        }
+        public void Ocupar()
+        {
+            if (Estado == EstadoEspacio.Ocupado)
+                throw new ExcepcionDeReglaDeNegocio("El nicho ya está ocupado");
+
+            Estado = EstadoEspacio.Ocupado;
+        }
+
+        public static Espacio Crear(CodigoContrato codigo, EstadoTipo tipo, NivelesPiso piso, string ubicacion)
+        {
+            return new Espacio(Guid.CreateVersion7(), codigo, tipo,piso, EstadoEspacio.Disponible, ubicacion);
+        }
+        public static Espacio Rehidratar(Guid id, CodigoContrato codigo, EstadoTipo tipo ,NivelesPiso piso, EstadoEspacio estado, string ubicacion)
+        {
+            return new Espacio(id, codigo, tipo,piso, estado, ubicacion);
+        }
+
+    }
+}
