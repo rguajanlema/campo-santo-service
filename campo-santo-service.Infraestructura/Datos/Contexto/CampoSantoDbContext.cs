@@ -7,6 +7,8 @@ namespace campo_santo_service.Infraestructura.Datos.Contexto
     public class CampoSantoDbContext : DbContext
     {
         public DbSet<EspacioEntity> Espacios => Set<EspacioEntity>();
+        public DbSet<ServicioEntity> Servicios => Set<ServicioEntity>();
+
         public CampoSantoDbContext(DbContextOptions<CampoSantoDbContext> options):base(options)
         {
             

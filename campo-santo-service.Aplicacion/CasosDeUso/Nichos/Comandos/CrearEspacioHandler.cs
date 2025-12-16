@@ -4,9 +4,6 @@ using campo_santo_service.Dominio.Entidades;
 using campo_santo_service.Dominio.Enums;
 using campo_santo_service.Dominio.ObjetosDeValor;
 using campo_santo_service.Dominio.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
 {

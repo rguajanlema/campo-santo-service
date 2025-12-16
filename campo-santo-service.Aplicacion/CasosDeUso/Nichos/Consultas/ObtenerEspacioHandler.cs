@@ -1,4 +1,5 @@
 ﻿using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos;
+using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.Repositorios;
 
 
@@ -18,8 +19,9 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas
             var resultado = await repository.ObtenerPorId(id);
             if (resultado == null)
             {
-                throw new ApplicationException($"Error en obtener el espacio: {id}");
+                throw new ExcepcionDeReglaDeNegocio($"Error en obtener el espacio: {id}");
             }
+
             return new ObtenerEspacioDto
             {
                 Id = resultado.Id,
