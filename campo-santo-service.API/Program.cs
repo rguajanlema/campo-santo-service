@@ -2,6 +2,7 @@ using campo_santo_service.API.Hubs;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas;
 using campo_santo_service.Aplicacion.CasosDeUso.Servicios.Comandos;
+using campo_santo_service.Aplicacion.CasosDeUso.Servicios.Consultas;
 using campo_santo_service.Aplicacion.Contratos.Persistencia;
 using campo_santo_service.Dominio.Repositorios;
 using campo_santo_service.Infraestructura.Datos.Contexto;
@@ -45,7 +46,9 @@ builder.Services.AddScoped<IUnidadDeTrabajo, UnitOfWorkEF>();
 
 builder.Services.AddScoped<CrearEspacioHandler>();
 builder.Services.AddScoped<TodosEspacioHandler>();
+
 builder.Services.AddScoped<ObtenerEspacioHandler>();
+builder.Services.AddScoped<TodosServicioHandler>();
 
 builder.Services.AddScoped<CrearServicioHandler>();
 

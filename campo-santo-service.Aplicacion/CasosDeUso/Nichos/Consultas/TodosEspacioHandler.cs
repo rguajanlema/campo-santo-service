@@ -1,5 +1,4 @@
 ﻿using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos;
-using campo_santo_service.Aplicacion.Contratos.Persistencia;
 using campo_santo_service.Dominio.Repositorios;
 
 
