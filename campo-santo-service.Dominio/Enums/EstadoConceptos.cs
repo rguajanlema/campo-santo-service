@@ -4,10 +4,10 @@ using System.Text;
 
 namespace campo_santo_service.Dominio.Enums
 {
-    public enum EnumContrato
+    public enum EstadoConceptos
     {
-        Anual,
-        TriAnual,
-        SeAnual,
+        Inicio,
+        Finaliza,
+        Renovacion
     }
 }

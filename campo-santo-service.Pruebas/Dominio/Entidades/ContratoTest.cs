@@ -14,37 +14,43 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Constructor_NumeroContratoNull_LanzaExcepcio()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Contrato(
-                null!,
-                Guid.CreateVersion7(),
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
+                new CodigoContrato(null!),
                 Guid.CreateVersion7(),
                 EnumContrato.Anual,
                 100,
-                Guid.CreateVersion7()
+                new FechaContrato(DateTime.UtcNow),
+                Guid.CreateVersion7(),
+                "A",
+                "Firma"
                 ));
         }
         [TestMethod]
         public void Constructor_MontoCero_LanzaExcepcio()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Contrato(
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
-                Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
                 EnumContrato.Anual,
                 0,
-                Guid.CreateVersion7()
+                new FechaContrato(DateTime.UtcNow),
+                Guid.CreateVersion7(),
+                "A",
+                "Firma"
                 ));
         }
         [TestMethod]
         public void Constructor_MontoMenorCero_LanzaExcepcio()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Contrato(
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
-                Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
                 EnumContrato.Anual,
                 -10,
-                Guid.CreateVersion7()
+                new FechaContrato(DateTime.UtcNow),
+                Guid.CreateVersion7(),
+                "A",
+                "Firma"
                 ));
         }
     }

@@ -1,4 +1,5 @@
-﻿using campo_santo_service.Dominio.Excepciones;
+﻿using campo_santo_service.Dominio.Enums;
+using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
 
 namespace campo_santo_service.Dominio.Entidades
@@ -13,7 +14,7 @@ namespace campo_santo_service.Dominio.Entidades
         public Email Email { get; private set; } = null!;
         public Telefono Telefono { get; private set; } = null !;
 
-        public Cliente(string nombre, string apellido, string direccion, Cedula cedula, Email email, Telefono telefono)
+        internal Cliente(Guid id, string nombre, string apellido, string direccion, Cedula cedula, Email email, Telefono telefono)
         {
             if (string.IsNullOrWhiteSpace(nombre))
             {
@@ -40,12 +41,23 @@ namespace campo_santo_service.Dominio.Entidades
                 throw new ExcepcionDeReglaDeNegocio($"El {nameof(telefono)} es obligatorio");
             }
 
-            Id = Guid.CreateVersion7();
+            Id = id;
             Nombre = nombre;
             Apellido = apellido;
             Direccion = direccion;
             Email = email;
             Cedula = cedula;
+            Telefono = telefono;
+        }
+
+        public static Cliente Crear(string nombre, string apellido, string direccion, Cedula cedula, Email email, Telefono telefono)
+        {
+            return new Cliente(Guid.CreateVersion7(), nombre, apellido, direccion, cedula, email, telefono);
+        }
+
+        public static Cliente Reidatar(Guid id, string nombre, string apellido, string direccion, Cedula cedula, Email email, Telefono telefono)
+        {
+            return new Cliente(id, nombre, apellido, direccion, cedula, email, telefono);
         }
     }
 }

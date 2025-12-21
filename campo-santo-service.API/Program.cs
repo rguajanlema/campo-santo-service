@@ -1,4 +1,5 @@
 using campo_santo_service.API.Hubs;
+using campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas;
 using campo_santo_service.Aplicacion.CasosDeUso.Servicios.Comandos;
@@ -42,15 +43,22 @@ builder.Services.AddDbContext<CampoSantoDbContext>(options =>
 
 builder.Services.AddScoped<IEspacioRepository, EspacioRepositoryEF>();
 builder.Services.AddScoped<IServicioRepository, ServicioRepositoryEF>();
+builder.Services.AddScoped<IContratoRepository, ContratoRepositoryEF>();
+builder.Services.AddScoped<IPagoRepository, PagoRepositoryEF>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepositoryEF>();
 builder.Services.AddScoped<IUnidadDeTrabajo, UnitOfWorkEF>();
 
 builder.Services.AddScoped<CrearEspacioHandler>();
 builder.Services.AddScoped<TodosEspacioHandler>();
+builder.Services.AddScoped<DisponiblesEspacioHandler>();
 
 builder.Services.AddScoped<ObtenerEspacioHandler>();
 builder.Services.AddScoped<TodosServicioHandler>();
 
 builder.Services.AddScoped<CrearServicioHandler>();
+
+builder.Services.AddScoped<CrearContratoHandler>();
+
 
 var app = builder.Build();
 

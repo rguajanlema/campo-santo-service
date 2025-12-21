@@ -14,18 +14,21 @@ namespace campo_santo_service.API.Controllers
         private readonly CrearEspacioHandler crearEspacio;
         private readonly TodosEspacioHandler todosEspacio;
         private readonly ObtenerEspacioHandler obtenerEspacio;
+        private readonly DisponiblesEspacioHandler disponiblesEspacio;
         private readonly IHubContext<EspaciosHub> hubContext;
 
         public EspacioController(
             CrearEspacioHandler crearEspacio, 
             TodosEspacioHandler todosEspacio,
             ObtenerEspacioHandler obtenerEspacio,
+            DisponiblesEspacioHandler disponiblesEspacio,
             IHubContext<EspaciosHub> hubContext
             )
         {
             this.crearEspacio = crearEspacio;
             this.todosEspacio = todosEspacio;
             this.obtenerEspacio = obtenerEspacio;
+            this.disponiblesEspacio = disponiblesEspacio;
             this.hubContext = hubContext;
         }
 
@@ -50,6 +53,12 @@ namespace campo_santo_service.API.Controllers
         public async Task<IActionResult> Obtener(Guid id)
         {
             var resultado = await obtenerEspacio.Ejecutar(id);
+            return Ok(resultado);
+        }
+        [HttpGet("disponibles")]
+        public async Task<IActionResult> Disponibles()
+        {
+            var resultado = await disponiblesEspacio.Ejecutar();
             return Ok(resultado);
         }
     }

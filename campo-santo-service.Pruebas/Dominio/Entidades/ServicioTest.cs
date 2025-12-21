@@ -10,7 +10,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Constructor_NombreNull_LanzaExcepcion()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Servicio.Agregar(
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Servicio.Crear(
                 null!,
                 10
                 )
@@ -19,7 +19,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Constructor_PrecioMenorCero_LanzaExcepcion()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Servicio.Agregar(
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Servicio.Crear(
                 "Exumancion",
                 -10
                 )
@@ -37,7 +37,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Constructor_NoLanzaExcepcion()
         {
-            Servicio.Agregar(
+            Servicio.Crear(
                 "Exumancion",
                 20
                 );
