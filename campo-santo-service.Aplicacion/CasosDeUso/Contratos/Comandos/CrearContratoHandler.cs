@@ -45,20 +45,18 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
                 dto.Monto,
                 new FechaContrato(dto.FechaInicio),
                 dto.EspacioId,
-                "A",
+                EstadoContrato.Activo,
                 dto.Observaciones
                 );
 
-            contrato.RegistrarPago(
+            contrato.RegistrarPagoInicial(
                 new FechaContrato(dto.FechaInicio),
                 dto.Monto,
-                EstadoConceptos.Inicio,
                 dto.Observaciones
                 );
 
             await clienteRepository.Agregar(cliente);
             await contratoRepository.Agregar(contrato);
-            await pagoRepository.Agregar(contrato.Pagos.First());
 
             await uow.CommitAsync();
 

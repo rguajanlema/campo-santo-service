@@ -16,8 +16,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 "Cardenas",
                 EstadoGenero.Femenino,
                 new Cedula("100000000-0"),
-                new Fecha(DateTime.UtcNow.AddDays(-10)),
-                new Fecha(DateTime.UtcNow.AddDays(-1))
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
                 )
             );
         }
@@ -29,8 +29,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 null!,
                 EstadoGenero.Femenino,
                 new Cedula("100000000-0"),
-                new Fecha(DateTime.UtcNow.AddDays(-10)),
-                new Fecha(DateTime.UtcNow.AddDays(-1))
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
                 )
             );
         }
@@ -42,8 +42,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 "Yamberla",
                 EstadoGenero.Femenino,
                 null!,
-                new Fecha(DateTime.UtcNow.AddDays(-10)),
-                new Fecha(DateTime.UtcNow.AddDays(-1))
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
                 )
             );
         }
@@ -56,7 +56,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 EstadoGenero.Femenino,
                 new Cedula("100000000-0"),
                 null!,
-                new Fecha(DateTime.UtcNow.AddDays(-1))
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
                 )
             );
         }
@@ -68,7 +68,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 "Yamberla",
                 EstadoGenero.Femenino,
                 new Cedula("100000000-0"),
-                new Fecha(DateTime.UtcNow.AddDays(-10)),
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 null!
                 )
             );
@@ -76,14 +76,15 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Constructor_NoLanzaExcepcion()
         {
-            new Difunto(
+            var difunto = new Difunto(
                 "Jose",
                 "Yamberla",
                 EstadoGenero.Femenino,
                 new Cedula("100000000-0"),
-                new Fecha(DateTime.UtcNow.AddDays(-10)),
-                new Fecha(DateTime.UtcNow.AddDays(-1))
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
+                new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
                 );
+            Assert.IsNotNull(difunto);
         }
     }
 }

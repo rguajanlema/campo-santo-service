@@ -9,24 +9,18 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
         [TestMethod]
         public void Constructor_FechaNacimientoNoPuedeSerMayorFechaActual_LanzaExcepcion()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Fecha(DateTime.UtcNow.AddDays(1)));
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new FechaNacimiento(DateTime.UtcNow.AddDays(1)));
         }
         [TestMethod]
         public void Constructor_FechaNacimientoNoPuedeSerIgualFechaActual_LanzaExcepcion()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Fecha(DateTime.UtcNow));
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new FechaNacimiento(DateTime.UtcNow));
         }
         [TestMethod]
         public void Constructor_FechaNacimiento_NoLanzaExcepcion()
         {
-            try
-            {
-                new Fecha(DateTime.UtcNow.AddDays(-1));
-            }
-            catch
-            {
-                Assert.Fail("No debe lanzar excepciones.");
-            }
+            var fecha = new FechaNacimiento(DateTime.UtcNow.AddDays(-1));
+            Assert.IsNotNull(fecha);
         }
     }
 }

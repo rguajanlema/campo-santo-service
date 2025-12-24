@@ -12,25 +12,16 @@ namespace campo_santo_service.Dominio.Entidades
         public FechaContrato FechaInicio { get; private set; }
         public DateTime FechaFinaliza { get; private set; }
         public EnumContrato Tipo { get; private set; }
-        public string Estado { get; private set; } = null!;
+        public EstadoContrato Estado { get; private set; }
         public string Observacion { get; private set; } = null!;
         public decimal Monto { get; private set; }
         public Guid ClienteId { get; private set; }
         public Guid EspacioId { get; private set; }
-
-        private readonly List<Pago> _pagos = new();
+        private readonly List<Pago> _pagos;
         public IReadOnlyCollection<Pago> Pagos => _pagos;
 
-        internal Contrato(Guid id, 
-            CodigoContrato numeroContrato, 
-            Guid clienteId,  
-            EnumContrato tipo,  
-            decimal monto, 
-            FechaContrato fecha,
-            DateTime fechaFinaliza,
-            Guid nichoId,
-            string estado,
-            string observacion
+        private Contrato(Guid id, CodigoContrato numeroContrato, Guid clienteId, EnumContrato tipo, decimal monto, 
+            FechaContrato fecha, DateTime fechaFinaliza, Guid nichoId, EstadoContrato estado, string observacion
             )
         {
             _pagos = new List<Pago>();
@@ -46,10 +37,6 @@ namespace campo_santo_service.Dominio.Entidades
             if (monto < decimal.Zero)
             {
                 throw new ExcepcionDeReglaDeNegocio($"El {nameof(monto)} no es correcto");
-            }
-            if (string.IsNullOrEmpty(estado))
-            {
-                throw new ExcepcionDeReglaDeNegocio($"El {nameof(estado)} es obligatorio");
             }
             if (string.IsNullOrEmpty(observacion))
             {
@@ -67,13 +54,15 @@ namespace campo_santo_service.Dominio.Entidades
             Estado = estado;
             Observacion = observacion;
         }
-        public static Contrato Crear(CodigoContrato numeroContrato, Guid clienteId,  EnumContrato tipo, decimal monto, FechaContrato fecha, Guid nichoId, string estado,
-            string observacion)
+        public static Contrato Crear(
+            CodigoContrato numeroContrato, Guid clienteId,  EnumContrato tipo, decimal monto, 
+            FechaContrato fecha, Guid nichoId, EstadoContrato estado, string observacion)
         {
             return new Contrato(Guid.CreateVersion7(), numeroContrato, clienteId, tipo, monto, fecha, DateTime.UtcNow.AddYears(10), nichoId, estado,observacion);
         }
-        public static Contrato Reidratar(Guid id, CodigoContrato numeroContrato, Guid clienteId,  EnumContrato tipo, decimal monto, FechaContrato fecha, 
-            DateTime fechaFinaliza ,Guid nichoId, string estado, string observacion)
+        public static Contrato Reidratar(
+            Guid id, CodigoContrato numeroContrato, Guid clienteId, EnumContrato tipo, decimal monto, 
+            FechaContrato fecha, DateTime fechaFinaliza ,Guid nichoId, EstadoContrato estado, string observacion)
         {
             return new Contrato(id,numeroContrato,clienteId,tipo,monto,fecha,fechaFinaliza,nichoId, estado, observacion);
         }
@@ -87,6 +76,7 @@ namespace campo_santo_service.Dominio.Entidades
 
             _pagos.Add(Pago.RegistarPago(Id, fecha, monto, concepto, descripcion));
         }
+
         public int ObtenerAniosAtrasados(DateOnly fechaActual)
         {
             if (fechaActual.Year < FechaInicio.Valor.Year)
@@ -103,6 +93,36 @@ namespace campo_santo_service.Dominio.Entidades
                 .Distinct();
 
             return aniosEsperados.Except(aniosPagados).Count();
+        }
+
+        public void RegistrarPagoInicial(FechaContrato fecha, decimal monto, string descripcion)
+        {
+            if (_pagos.Any())
+                throw new ExcepcionDeReglaDeNegocio(
+                    "El contrato ya tiene un pago inicial");
+
+            _pagos.Add(
+                Pago.RegistrarPagoInicial(
+                    Id,
+                    fecha,
+                    monto,
+                    descripcion
+                )
+            );
+        }
+        
+        public void RehidratarPago( Guid pagoId, FechaContrato fecha, decimal monto, EstadoConceptos concepto, string observacion)
+        {
+            _pagos.Add(
+                Pago.Rehidratar(
+                    pagoId,
+                    Id,
+                    fecha,
+                    monto,
+                    concepto,
+                    observacion
+                )
+            );
         }
 
     }

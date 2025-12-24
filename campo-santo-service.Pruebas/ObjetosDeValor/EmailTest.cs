@@ -18,16 +18,15 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Email("roberto.com"));
         }
         [TestMethod]
+        public void Constructor_EmailBasio_LanzaException()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Email(""));
+        }
+        [TestMethod]
         public void Constructor_EmailValido_NoLanzaException()
         {
-            try
-            {
-                new Email("roberto@ejemplo.com");
-            }
-            catch
-            {
-                Assert.Fail("No debe lanzar excepciones.");
-            }
+            var email = new Email("roberto@ejemplo.com").Valor;
+            Assert.IsNotNull(email);
         }
     }
 }

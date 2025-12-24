@@ -12,7 +12,6 @@ namespace campo_santo_service.Infraestructura.Modelos
         public Guid Id { get; set; }
         [Column("nombre")]
         public string Nombre { get; set; } = null!;
-        //public string Descripcion { get; set; } = null!;
         [Column("precio")]
         public decimal Precio { get; set; }
 
@@ -28,7 +27,7 @@ namespace campo_santo_service.Infraestructura.Modelos
 
         public Servicio ToDomain()
         {
-            return Servicio.ReRehidratar(Id, Nombre,Precio);
+            return Servicio.Rehidratar(Id, Nombre,Precio);
         }
     }
 }

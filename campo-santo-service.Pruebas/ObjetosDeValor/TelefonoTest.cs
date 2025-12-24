@@ -22,16 +22,15 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Telefono("0981124"));
         }
         [TestMethod]
+        public void Constructor_TelefonoBasio_LanzaExcepcion()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Telefono(""));
+        }
+        [TestMethod]
         public void Constructor_Telefono_NoLanzaException()
         {
-            try
-            {
-                new Telefono("0981124583");
-            }
-            catch
-            {
-                Assert.Fail("No debe lanzar excepciones.");
-            }
+            var telefono = new Telefono("0981124583").Valor;
+            Assert.IsNotNull(telefono);
         }
     }
 }

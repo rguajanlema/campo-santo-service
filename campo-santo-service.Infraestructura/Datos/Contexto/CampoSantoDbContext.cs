@@ -43,6 +43,13 @@ namespace campo_santo_service.Infraestructura.Datos.Contexto
                 entity.Property(e => e.Ubicacion)
                       .HasColumnName("ubicacion");
             });
+
+            modelBuilder.Entity<ContratoEntity>()
+            .HasMany(c => c.Pagos)
+            .WithOne(p => p.Contrato)
+            .HasForeignKey(p => p.ContratoId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }

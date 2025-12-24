@@ -22,6 +22,11 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Cedula("1001010106-2"));
         }
         [TestMethod]
+        public void Constructor_CedulaEsBasio_LanzaException()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Cedula(""));
+        }
+        [TestMethod]
         public void Constructor_CedulaMenorADiezDigitos_LanzaException()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Cedula("10010101-2"));
@@ -29,14 +34,8 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
         [TestMethod]
         public void Constructor_Cedula_NoLanzaException()
         {
-            try
-            {
-                new Cedula("100101010-2");
-            }
-            catch
-            {
-                Assert.Fail("No debe lanzar excepciones.");
-            }
+            var cedula = new Cedula("100101010-2").Valor;
+            Assert.IsNotNull(cedula);
         }
     }
 }

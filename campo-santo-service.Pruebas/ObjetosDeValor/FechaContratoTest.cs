@@ -1,8 +1,5 @@
 ﻿using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Pruebas.ObjetosDeValor
 {
@@ -12,20 +9,20 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
         [TestMethod]
         public void Constructor_FechaNoPuedeSerMayorFechaActual_LanzaExcepcion()
         {
-            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Fecha(DateTime.UtcNow.AddDays(1)));
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new FechaContrato(DateTime.UtcNow.AddDays(1)));
+        }
+        [TestMethod]
+        public void Constructor_FechaActual_LanzaExcepcion()
+        {
+            var fecha = new FechaContrato(DateTime.UtcNow);
+            Assert.IsNotNull(fecha);
         }
         
         [TestMethod]
         public void Constructor_Fecha_NoLanzaExcepcion()
         {
-            try
-            {
-                new Fecha(DateTime.UtcNow.AddDays(-1));
-            }
-            catch
-            {
-                Assert.Fail("No debe lanzar excepciones.");
-            }
+            var fecha = new FechaContrato(DateTime.UtcNow.AddDays(-1));
+            Assert.IsNotNull(fecha);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace campo_santo_service.Dominio.Entidades
         public string Apellido { get; private set; } = null!;
         public EstadoGenero Genero { get; private set; }
         public Cedula Cedula { get; private set; } = null!;
-        public Fecha FechaNacimiento { get; private set; } = null!;
-        public Fecha FechaFallecimiento { get; private set; } = null!;
+        public FechaNacimiento FechaNacimiento { get; private set; } = null!;
+        public FechaNacimiento FechaFallecimiento { get; private set; } = null!;
 
-        public Difunto(string nombre, string apellido, EstadoGenero genero, Cedula cedula, Fecha fechaNacimiento, Fecha fechaFallecimiento)
+        public Difunto(string nombre, string apellido, EstadoGenero genero, Cedula cedula, FechaNacimiento fechaNacimiento, FechaNacimiento fechaFallecimiento)
         {
             if (string.IsNullOrWhiteSpace(nombre))
             {

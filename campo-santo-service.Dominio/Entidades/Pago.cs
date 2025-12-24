@@ -1,9 +1,6 @@
 ﻿using campo_santo_service.Dominio.Enums;
 using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Dominio.Entidades
 {
@@ -16,7 +13,7 @@ namespace campo_santo_service.Dominio.Entidades
         public EstadoConceptos Concepto { get; private set; }
         public string Observacion { get; private set; } = null!;
 
-        internal Pago(Guid id, Guid contratoId, FechaContrato fechaPago, decimal monto, EstadoConceptos concepto, string observacion)
+        private Pago(Guid id, Guid contratoId, FechaContrato fechaPago, decimal monto, EstadoConceptos concepto, string observacion)
         {
             if(monto < 0)
             {
@@ -34,7 +31,7 @@ namespace campo_santo_service.Dominio.Entidades
             Concepto = concepto;
             Observacion = observacion;
         }
-        public static Pago RegistarPago(Guid contratoId, FechaContrato fecha, decimal monto, EstadoConceptos concepto, string observacion )
+        internal static Pago RegistarPago(Guid contratoId, FechaContrato fecha, decimal monto, EstadoConceptos concepto, string observacion )
         {
             return new Pago(Guid.CreateVersion7(),contratoId, fecha, monto, concepto, observacion);
         }
@@ -43,5 +40,18 @@ namespace campo_santo_service.Dominio.Entidades
         {
             return new Pago(id, contratoId, fechaPago, monto, concepto, observacion);
         }
+
+        internal static Pago RegistrarPagoInicial(Guid contratoId, FechaContrato fecha, decimal monto, string descripcion)
+        {
+            return new Pago(
+                Guid.CreateVersion7(),
+                contratoId,
+                fecha,
+                monto,
+                EstadoConceptos.Inicio,
+                descripcion
+            );
+        }
+
     }
 }

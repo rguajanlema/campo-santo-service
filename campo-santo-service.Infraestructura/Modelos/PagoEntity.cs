@@ -13,6 +13,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         [Column("id")]
         public Guid Id { get; set; }
         [Column("contrato_id")]
+        public ContratoEntity Contrato { get; set; } = null!;
         public Guid ContratoId { get; set; }
         [Column("fecha_pago")]
         public DateTime FechaPago { get; set; }

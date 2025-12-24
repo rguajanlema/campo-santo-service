@@ -2,7 +2,7 @@
 {
     public sealed class CrearPagoDto
     {
-        public DateOnly FechaPago { get; set; }
+        public DateTime FechaPago { get; set; }
         public decimal Monto { get; set; }
         public string Concepto { get; set; } = null!;
         public string Observaciones { get; set; } = null!;

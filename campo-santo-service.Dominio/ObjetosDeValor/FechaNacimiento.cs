@@ -3,10 +3,10 @@
 namespace campo_santo_service.Dominio.ObjetosDeValor
 {
     
-    public record Fecha
+    public sealed record FechaNacimiento
     {
         public DateTime Valor { get; }
-        public Fecha(DateTime fechaNacimiento)
+        public FechaNacimiento(DateTime fechaNacimiento)
         {
             if (DateTime.UtcNow.Date < fechaNacimiento.Date)
             {

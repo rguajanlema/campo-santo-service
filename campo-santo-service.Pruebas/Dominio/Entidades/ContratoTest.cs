@@ -2,9 +2,6 @@
 using campo_santo_service.Dominio.Enums;
 using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Pruebas.Dominio.Entidades
 {
@@ -21,7 +18,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 100,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
-                "A",
+                EstadoContrato.Activo,
                 "Firma"
                 ));
         }
@@ -35,7 +32,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 0,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
-                "A",
+                EstadoContrato.Activo,
                 "Firma"
                 ));
         }
@@ -49,7 +46,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 -10,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
-                "A",
+                EstadoContrato.Activo,
                 "Firma"
                 ));
         }

@@ -2,9 +2,6 @@
 using campo_santo_service.Dominio.Repositorios;
 using campo_santo_service.Infraestructura.Datos.Contexto;
 using campo_santo_service.Infraestructura.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Infraestructura.Datos.Repositorios
 {

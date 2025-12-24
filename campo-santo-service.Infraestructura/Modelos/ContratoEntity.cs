@@ -31,6 +31,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         public Guid ClienteId { get; set; }
         [Column("espacio_id")]
         public Guid EspacioId { get; set; }
+        public ICollection<PagoEntity> Pagos { get; set; } = new List<PagoEntity>();
 
         public static ContratoEntity FromDomain(Contrato contrato)
         {
@@ -41,16 +42,28 @@ namespace campo_santo_service.Infraestructura.Modelos
                 FechaInicio = contrato.FechaInicio.Valor,
                 FechaFin = contrato.FechaFinaliza,
                 TipoConcepto = contrato.Tipo.ToString(),
-                Estado = contrato.Estado,
+                Estado = contrato.Estado.ToString(),
                 Observaciones = contrato.Observacion,
                 Monto = contrato.Monto,
                 ClienteId = contrato.ClienteId,
                 EspacioId = contrato.EspacioId,
+                Pagos = contrato.Pagos
+                .Select(p => new PagoEntity
+                {
+                    Id = p.Id,
+                    ContratoId = contrato.Id,
+                    FechaPago = p.FechaPago.Valor,
+                    Monto = p.Monto,
+                    Concepto = p.Concepto.ToString(),
+                    Observacion = p.Observacion
+                })
+                .ToList()
+
             };
         }
         public Contrato ToDomain()
         {
-            return Contrato.Reidratar(
+            var contrato = Contrato.Reidratar(
                 Id,
                 new CodigoContrato(Codigo),
                 ClienteId,
@@ -59,9 +72,21 @@ namespace campo_santo_service.Infraestructura.Modelos
                 new FechaContrato(FechaInicio),
                 FechaFin,
                 EspacioId,
-                Estado,
+                Enum.Parse<EstadoContrato>(Estado),
                 Observaciones
                 );
+            foreach (var pago in Pagos)
+            {
+                contrato.RehidratarPago(
+                    pago.Id,
+                    new FechaContrato(pago.FechaPago),
+                    pago.Monto,
+                    Enum.Parse<EstadoConceptos>(pago.Concepto),
+                    pago.Observacion
+                );
+            }
+
+            return contrato;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace campo_santo_service.Dominio.Entidades
         {
             return new Servicio(id, nombre, precio);
         }
-        public static Servicio ReRehidratar(Guid id, string nombre, decimal precio)
+        public static Servicio Rehidratar(Guid id, string nombre, decimal precio)
         {
             return new Servicio(id, nombre, precio);
         }
