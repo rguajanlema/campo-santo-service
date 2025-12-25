@@ -1,4 +1,5 @@
 ﻿using campo_santo_service.Dominio.Entidades;
+using campo_santo_service.Dominio.ObjetosDeValor;
 
 namespace campo_santo_service.Dominio.Repositorios
 {
@@ -6,5 +7,6 @@ namespace campo_santo_service.Dominio.Repositorios
     {
         Task<Cliente?> ObtenerPorId(Guid id);
         Task Agregar(Cliente espacio);
+        Task<Cliente?> ObtenerPorCedula(Cedula cedula);
     }
 }

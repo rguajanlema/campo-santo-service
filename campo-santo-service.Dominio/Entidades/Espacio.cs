@@ -4,7 +4,7 @@ using campo_santo_service.Dominio.ObjetosDeValor;
 
 namespace campo_santo_service.Dominio.Entidades
 {
-    public class Espacio
+    public sealed class Espacio
     {
         public Guid Id { get; private set; }
         public CodigoContrato Codigo { get; private set; } = null!;

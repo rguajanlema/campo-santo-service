@@ -50,6 +50,11 @@ namespace campo_santo_service.Infraestructura.Datos.Contexto
             .HasForeignKey(p => p.ContratoId)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<ContratoEntity>()
+            .HasOne(c => c.Cliente)
+            .WithMany()
+            .HasForeignKey(c => c.ClienteId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

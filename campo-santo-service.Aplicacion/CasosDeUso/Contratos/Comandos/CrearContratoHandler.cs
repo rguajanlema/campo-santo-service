@@ -12,31 +12,37 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
     {
         private readonly IUnidadDeTrabajo uow;
         private readonly IClienteRepository clienteRepository;
-        private readonly IPagoRepository pagoRepository;
         private readonly IContratoRepository contratoRepository;
 
         public CrearContratoHandler(IUnidadDeTrabajo uow, 
             IClienteRepository clienteRepository,
-            IPagoRepository pagoRepository,
             IContratoRepository contratoRepository
             )
         {
             this.uow = uow;
             this.clienteRepository = clienteRepository;
-            this.pagoRepository = pagoRepository;
             this.contratoRepository = contratoRepository;
         }
 
-        public async Task<Guid> Ejecutar(CrearContratoDto dto)
+        public async Task<Guid> Ejecutar(CrearContratoCommand dto)
         {
-            var cliente = Cliente.Crear(
-                dto.FamiliarDto.Nombre,
-                dto.FamiliarDto.Apellido,
-                dto.FamiliarDto.Direccion,
-                new Cedula(dto.FamiliarDto.Cedula),
-                new Email(dto.FamiliarDto.Correo),
-                new Telefono(dto.FamiliarDto.Telefono)
+            var cliente = await clienteRepository
+                .ObtenerPorCedula(new Cedula(dto.Familiar.Cedula));
+
+            if(cliente is null)
+            {
+                cliente = Cliente.Crear(
+                dto.Familiar.Nombre,
+                dto.Familiar.Apellido,
+                dto.Familiar.Direccion,
+                new Cedula(dto.Familiar.Cedula),
+                new Email(dto.Familiar.Correo),
+                new Telefono(dto.Familiar.Telefono)
                 );
+
+                await clienteRepository.Agregar(cliente);
+            }
+            
 
             var contrato = Contrato.Crear(
                 new CodigoContrato(dto.Codigo),
@@ -45,19 +51,14 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
                 dto.Monto,
                 new FechaContrato(dto.FechaInicio),
                 dto.EspacioId,
-                EstadoContrato.Activo,
-                dto.Observaciones
+                dto.Observaciones,
+                new FechaContrato(dto.PagoInicial.FechaPago),
+                dto.PagoInicial.Monto,
+                dto.PagoInicial.Observaciones
                 );
 
-            contrato.RegistrarPagoInicial(
-                new FechaContrato(dto.FechaInicio),
-                dto.Monto,
-                dto.Observaciones
-                );
-
-            await clienteRepository.Agregar(cliente);
+            
             await contratoRepository.Agregar(contrato);
-
             await uow.CommitAsync();
 
             return contrato.Id;

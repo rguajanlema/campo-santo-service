@@ -18,8 +18,8 @@ namespace campo_santo_service.Infraestructura.Modelos
         public DateTime FechaInicio { get; set; }
         [Column("fecha_fin")]
         public DateTime FechaFin { get; set; }
-        [Column("tipo_concepto")]
-        public string TipoConcepto { get; set; } = null!;
+        [Column("tipo_contrato")]
+        public string TipoContrato { get; set; } = null!;
 
         [Column("estado")]
         public string Estado {  get; set; } = null!;
@@ -27,8 +27,12 @@ namespace campo_santo_service.Infraestructura.Modelos
         public string Observaciones { get; set; } = null!;
         [Column("monto")]
         public decimal Monto { get; set; }
+
         [Column("cliente_id")]
         public Guid ClienteId { get; set; }
+        [ForeignKey(nameof(ClienteId))]
+        public ClienteEntity Cliente { get; set; } = null!;
+
         [Column("espacio_id")]
         public Guid EspacioId { get; set; }
         public ICollection<PagoEntity> Pagos { get; set; } = new List<PagoEntity>();
@@ -41,7 +45,7 @@ namespace campo_santo_service.Infraestructura.Modelos
                 Codigo = contrato.Codigo.Valor,
                 FechaInicio = contrato.FechaInicio.Valor,
                 FechaFin = contrato.FechaFinaliza,
-                TipoConcepto = contrato.Tipo.ToString(),
+                TipoContrato = contrato.Tipo.ToString(),
                 Estado = contrato.Estado.ToString(),
                 Observaciones = contrato.Observacion,
                 Monto = contrato.Monto,
@@ -67,7 +71,7 @@ namespace campo_santo_service.Infraestructura.Modelos
                 Id,
                 new CodigoContrato(Codigo),
                 ClienteId,
-                Enum.Parse<EnumContrato>(TipoConcepto),
+                Enum.Parse<EnumContrato>(TipoContrato),
                 Monto,
                 new FechaContrato(FechaInicio),
                 FechaFin,

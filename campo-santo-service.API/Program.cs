@@ -10,6 +10,7 @@ using campo_santo_service.Infraestructura.Datos.Contexto;
 using campo_santo_service.Infraestructura.Datos.Repositorios;
 using campo_santo_service.Infraestructura.Datos.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,12 +40,16 @@ builder.Services.AddDbContext<CampoSantoDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("CementerioDb")
     )
+    .EnableSensitiveDataLogging()
+    .LogTo(Console.WriteLine, LogLevel.Information)
 );
+
+
+
 
 builder.Services.AddScoped<IEspacioRepository, EspacioRepositoryEF>();
 builder.Services.AddScoped<IServicioRepository, ServicioRepositoryEF>();
 builder.Services.AddScoped<IContratoRepository, ContratoRepositoryEF>();
-builder.Services.AddScoped<IPagoRepository, PagoRepositoryEF>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepositoryEF>();
 builder.Services.AddScoped<IUnidadDeTrabajo, UnitOfWorkEF>();
 

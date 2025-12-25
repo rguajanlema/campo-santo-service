@@ -21,7 +21,7 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
         public async Task<Contrato?> ObtenerPorId(Guid id)
         {
-            var entity = await context.Contratos.FindAsync(id);
+            var entity = await context.Contratos.Include(c=>c.Pagos).FirstOrDefaultAsync(c => c.Id == id);
             return entity?.ToDomain();
         }
 

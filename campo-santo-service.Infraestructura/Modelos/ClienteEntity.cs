@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace campo_santo_service.Infraestructura.Modelos
 {
-    [Table("familiar")]
+    [Table("familiares")]
     public class ClienteEntity
     {
         [Key]

@@ -17,7 +17,7 @@ namespace campo_santo_service.API.Controllers
         }
 
         [HttpPost("crear")]
-        public async Task<IActionResult> Crear(CrearContratoDto request)
+        public async Task<IActionResult> Crear(CrearContratoCommand request)
         {
             var id = await crearContrato.Ejecutar(request);
             return CreatedAtAction(nameof(Crear), new { id }, null);
