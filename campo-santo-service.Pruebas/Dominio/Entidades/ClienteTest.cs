@@ -1,5 +1,4 @@
 ﻿using campo_santo_service.Dominio.Entidades;
-using campo_santo_service.Dominio.Enums;
 using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
 

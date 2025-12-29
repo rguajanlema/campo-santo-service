@@ -32,7 +32,9 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
         public async Task<Espacio?> ObtenerPorId(Guid id)
         {
-            var entity = await context.Espacios.FindAsync(id);
+            var entity = await context.Espacios
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id);
             return entity?.ToDomain();
         }
 
@@ -43,5 +45,13 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
             return espacios;
         }
+        public Task Actualizar(Espacio espacio)
+        {
+            var entity = EspacioEntity.FromDomain(espacio);
+            context.Espacios.Attach(entity);
+            context.Entry(entity).Property(x => x.Estado).IsModified = true;
+            return Task.CompletedTask;
+        }
+
     }
 }

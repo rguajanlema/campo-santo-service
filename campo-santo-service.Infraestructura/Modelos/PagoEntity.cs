@@ -14,7 +14,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         public Guid ContratoId { get; set; }
         public ContratoEntity Contrato { get; set; } = null!;
 
-        [Column("fecha_pago")]
+        [Column("fecha_pago", TypeName = "timestamp with time zone")]
         public DateTime FechaPago { get; set; }
         [Column("monto")]
         public decimal Monto { get; set; }

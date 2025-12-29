@@ -14,9 +14,9 @@ namespace campo_santo_service.Infraestructura.Modelos
         public Guid Id { get; set; }
         [Column("codigo")]
         public string Codigo { get; set; } = null!;
-        [Column("fecha_inicio")]
+        [Column("fecha_inicio", TypeName = "timestamp with time zone")]
         public DateTime FechaInicio { get; set; }
-        [Column("fecha_fin")]
+        [Column("fecha_fin", TypeName = "timestamp with time zone")]
         public DateTime FechaFin { get; set; }
         [Column("tipo_contrato")]
         public string TipoContrato { get; set; } = null!;

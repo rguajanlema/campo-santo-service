@@ -8,5 +8,6 @@ namespace campo_santo_service.Dominio.Repositorios
         Task Agregar(Espacio espacio);
         Task<IEnumerable<Espacio>> ObtenerTodo();
         Task<IEnumerable<Espacio>> ObtenerLibres();
+        Task Actualizar(Espacio espacio);
     }
 }
