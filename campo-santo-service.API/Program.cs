@@ -1,4 +1,5 @@
 using campo_santo_service.API.Hubs;
+using campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas;
 using campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos;
 using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas;
@@ -10,7 +11,8 @@ using campo_santo_service.Infraestructura.Datos.Contexto;
 using campo_santo_service.Infraestructura.Datos.Repositorios;
 using campo_santo_service.Infraestructura.Datos.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,10 +28,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder =>
     {
-        builder.WithOrigins("http://localhost:5173") // tu frontend
+        builder.WithOrigins("http://localhost:5173")
                .AllowAnyHeader()
                .AllowAnyMethod()
-               .AllowCredentials(); // si usas cookies o auth
+               .AllowCredentials();
     });
 });
 
@@ -59,14 +61,20 @@ builder.Services.AddScoped<DisponiblesEspacioHandler>();
 
 builder.Services.AddScoped<ObtenerEspacioHandler>();
 builder.Services.AddScoped<TodosServicioHandler>();
-
 builder.Services.AddScoped<CrearServicioHandler>();
-
 builder.Services.AddScoped<CrearContratoHandler>();
+builder.Services.AddScoped<BuscarClienteHandler>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()
+        );
+    });
 
 
 var app = builder.Build();
-
 
 
 if (app.Environment.IsDevelopment())
