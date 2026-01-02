@@ -3,6 +3,8 @@ using campo_santo_service.Aplicacion.CasosDeUso.Clientes.Dtos;
 using campo_santo_service.Dominio.Enums;
 using Microsoft.AspNetCore.Mvc;
 
+#pragma warning disable S6960
+
 namespace campo_santo_service.API.Controllers
 {
     [ApiController]

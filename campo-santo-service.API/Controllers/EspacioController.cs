@@ -5,6 +5,8 @@ using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
+#pragma warning disable S6960
+
 namespace campo_santo_service.API.Controllers
 {
     [ApiController]
