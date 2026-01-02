@@ -10,5 +10,6 @@ namespace campo_santo_service.Dominio.Repositorios
         Task<Cliente?> ObtenerPorCedula(Cedula cedula);
         Task<IEnumerable<Cliente>> ObtenerPorNombre(string nombre);
         Task<Cliente?> ObtenerPorContrato(string codigoContrato);
+        Task<IEnumerable<Cliente>> ObtenerTodos();
     }
 }

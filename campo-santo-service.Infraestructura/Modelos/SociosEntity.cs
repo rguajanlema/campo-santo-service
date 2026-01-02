@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace campo_santo_service.Infraestructura.Modelos
 {
-    [Table("familiares")]
-    public class ClienteEntity
+    [Table("socios")]
+    public class SociosEntity
     {
         [Key]
         [Column("id")]
@@ -24,9 +24,9 @@ namespace campo_santo_service.Infraestructura.Modelos
         [Column("direccion")]
         public string Direccion { get; set; } = null!;
 
-        public static ClienteEntity FromDomain(Cliente cliente)
+        public static SociosEntity FromDomain(Cliente cliente)
         {
-            return new ClienteEntity
+            return new SociosEntity
             {
                 Id = cliente.Id,
                 Nombre = cliente.Nombre,
@@ -34,7 +34,7 @@ namespace campo_santo_service.Infraestructura.Modelos
                 Cedula = cliente.Cedula.Valor,
                 Telefono = cliente.Telefono.Valor,
                 Correo = cliente.Email.Valor,
-                Direccion = cliente.Direccion
+                Direccion = cliente.Direccion,
             };
         }
         public Cliente ToDomain()

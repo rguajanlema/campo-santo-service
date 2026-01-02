@@ -1,4 +1,5 @@
-﻿using campo_santo_service.Dominio.Excepciones;
+﻿using campo_santo_service.Dominio.Enums;
+using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
 
 namespace campo_santo_service.Dominio.Entidades
@@ -12,6 +13,9 @@ namespace campo_santo_service.Dominio.Entidades
         public Cedula Cedula { get; private set; } = null!;
         public Email Email { get; private set; } = null!;
         public Telefono Telefono { get; private set; } = null !;
+
+        private readonly List<Contrato> _contratos = new();
+        public IReadOnlyCollection<Contrato> Contratos => _contratos;
 
         internal Cliente(
             Guid id, 
@@ -95,6 +99,34 @@ namespace campo_santo_service.Dominio.Entidades
                 cedula, 
                 email, 
                 telefono
+                );
+        }
+        public void RehidratarContrato(
+            Guid id,
+            CodigoContrato codigo,
+            FechaContrato fechaInicio,
+            DateTime fechaFinaliza,
+            EnumContrato tipo,
+            EstadoContrato estado,
+            string observacion,
+            decimal monto,
+            Guid clienteId,
+            Guid espacioId
+            )
+        {
+            _contratos.Add(
+                Contrato.Reidratar(
+                    id,
+                    codigo,
+                    clienteId,
+                    tipo,
+                    monto,
+                    fechaInicio,
+                    fechaFinaliza,
+                    espacioId,
+                    estado,
+                    observacion
+                    )
                 );
         }
     }

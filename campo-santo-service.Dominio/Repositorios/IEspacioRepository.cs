@@ -9,5 +9,6 @@ namespace campo_santo_service.Dominio.Repositorios
         Task<IEnumerable<Espacio>> ObtenerTodo();
         Task<IEnumerable<Espacio>> ObtenerLibres();
         Task Actualizar(Espacio espacio);
+        Task<Espacio?> ObtenerUltimo();
     }
 }

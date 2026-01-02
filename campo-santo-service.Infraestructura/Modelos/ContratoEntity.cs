@@ -31,7 +31,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         [Column("cliente_id")]
         public Guid ClienteId { get; set; }
         [ForeignKey(nameof(ClienteId))]
-        public ClienteEntity Cliente { get; set; } = null!;
+        public SociosEntity Cliente { get; set; } = null!;
 
         [Column("espacio_id")]
         public Guid EspacioId { get; set; }

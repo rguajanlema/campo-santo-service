@@ -10,7 +10,9 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas
     {
         private readonly IClienteRepository clienteRepository;
 
-        public BuscarClienteHandler(IClienteRepository clienteRepository)
+        public BuscarClienteHandler(
+            IClienteRepository clienteRepository
+            )
         {
             this.clienteRepository = clienteRepository;
         }
@@ -57,7 +59,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas
                 Apellido = cliente.Apellido,
                 Cedula = cliente.Cedula.Valor,
                 Correo = cliente.Email.Valor,
-                Telefono = cliente.Telefono.Valor
+                Telefono = cliente.Telefono.Valor,
             };
         }
     }

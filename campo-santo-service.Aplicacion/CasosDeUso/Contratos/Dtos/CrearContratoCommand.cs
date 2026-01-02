@@ -3,7 +3,6 @@
     public sealed record CrearContratoCommand(
         string Codigo,
         DateTime FechaInicio,
-        DateTime FechaFin,
         string TipoContrato,
         string Observaciones,
         decimal Monto,

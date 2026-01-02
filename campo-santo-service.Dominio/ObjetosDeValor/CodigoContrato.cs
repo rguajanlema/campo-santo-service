@@ -17,6 +17,7 @@ namespace campo_santo_service.Dominio.ObjetosDeValor
                 throw new ExcepcionDeReglaDeNegocio("Formato de Código inválido. Ejemplo válido: C-0001");
             
             Valor = codigo;
+
         }
 
         public CodigoContrato GenerarSiguiente()

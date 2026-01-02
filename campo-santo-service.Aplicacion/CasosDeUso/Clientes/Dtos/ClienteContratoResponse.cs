@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Dtos
+﻿namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Dtos
 {
     public class ClienteContratoResponse 
     {
-        public string id {  get; set; }
-            public string codigo { get; set; }
+        public Guid Id { get; set; }
+        public string Codigo { get; set; } = null!;
     }
 }

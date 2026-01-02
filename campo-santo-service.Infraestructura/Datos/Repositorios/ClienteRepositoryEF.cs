@@ -17,7 +17,7 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
         }
         public async Task Agregar(Cliente cliente)
         {
-            await context.Clientes.AddAsync(ClienteEntity.FromDomain(cliente));
+            await context.Clientes.AddAsync(SociosEntity.FromDomain(cliente));
         }
 
         public async Task<Cliente?> ObtenerPorCedula(Cedula cedula)
@@ -45,6 +45,13 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
                    x.Nombre.ToLower().Contains(nombre.ToLower()) ||
                    x.Apellido.ToLower().Contains(nombre.ToLower()))
                .ToListAsync();
+
+            return entities.Select(e => e.ToDomain());
+        }
+
+        public async Task<IEnumerable<Cliente>> ObtenerTodos()
+        {
+            var entities = await context.Clientes.ToArrayAsync();
 
             return entities.Select(e => e.ToDomain());
         }

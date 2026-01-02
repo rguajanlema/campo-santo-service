@@ -10,7 +10,7 @@ namespace campo_santo_service.Infraestructura.Datos.Contexto
         public DbSet<ServicioEntity> Servicios => Set<ServicioEntity>();
         public DbSet<PagoEntity> Pagos => Set<PagoEntity>();
         public DbSet<ContratoEntity> Contratos => Set<ContratoEntity>();
-        public DbSet<ClienteEntity> Clientes => Set<ClienteEntity>();
+        public DbSet<SociosEntity> Clientes => Set<SociosEntity>();
 
         public CampoSantoDbContext(DbContextOptions<CampoSantoDbContext> options):base(options)
         {

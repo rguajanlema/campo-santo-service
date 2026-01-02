@@ -53,5 +53,13 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
             return Task.CompletedTask;
         }
 
+        public async Task<Espacio?> ObtenerUltimo()
+        {
+            var entity = await context.Espacios
+            .OrderByDescending(e => e.Id)
+            .FirstOrDefaultAsync();
+
+            return entity?.ToDomain();
+        }
     }
 }

@@ -3,5 +3,6 @@
     public class ExcepcionDeReglaDeNegocio : Exception
     {
         public ExcepcionDeReglaDeNegocio(string msg) : base(msg) { }
+        
     }
 }

@@ -48,22 +48,26 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
                 await clienteRepository.Agregar(cliente);
             }
 
-            var espacio = await espacioRepository.ObtenerPorId(dto.EspacioId);
 
-            if(espacio is null)
-                throw new InvalidOperationException("El espacio no existe");
+            var ultimoEspacio = await espacioRepository.ObtenerUltimo();
+            var ultimoContrato = await contratoRepository.ObtenerUltimo();
 
-            espacio.Ocupar();
+            var codigo = ultimoEspacio.Codigo.GenerarSiguiente();
+            var codigoContrato = ultimoContrato.Codigo.GenerarSiguiente();
 
-            await espacioRepository.Actualizar(espacio);
+            var espacio = Espacio.Crear(codigo);
+            
+            
+            await espacioRepository.Agregar(espacio);
+
 
             var contrato = Contrato.Crear(
-                new CodigoContrato(dto.Codigo),
+                codigoContrato,
                 cliente.Id,
                 Enum.Parse<EnumContrato>(dto.TipoContrato),
                 dto.Monto,
                 new FechaContrato(DateTimeNormalizer.ToUtc(dto.FechaInicio)),
-                dto.EspacioId,
+                espacio.Id,
                 dto.Observaciones,
                 new FechaContrato(DateTimeNormalizer.ToUtc(dto.PagoInicial.FechaPago)),
                 dto.PagoInicial.Monto,

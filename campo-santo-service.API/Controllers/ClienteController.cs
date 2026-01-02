@@ -7,13 +7,18 @@ namespace campo_santo_service.API.Controllers
 {
     [ApiController]
     [Route("api/clientes")]
-    public class ClienteController:ControllerBase
+    public class ClienteController : ControllerBase
     {
         private readonly BuscarClienteHandler buscarClienteHandler;
+        private readonly ObtenerClienteHandler obtenerClienteHandler;
 
-        public ClienteController(BuscarClienteHandler buscarClienteHandler )
+        public ClienteController(
+            BuscarClienteHandler buscarClienteHandler,
+            ObtenerClienteHandler obtenerClienteHandler
+            )
         {
             this.buscarClienteHandler = buscarClienteHandler;
+            this.obtenerClienteHandler = obtenerClienteHandler;
         }
 
         [HttpGet("buscar")]
@@ -23,6 +28,13 @@ namespace campo_santo_service.API.Controllers
             )
         {
             var result = await buscarClienteHandler.Ejecutar(new BuscarClienteQuery(tipo, valor));
+            return Ok(result);
+        }
+
+        [HttpGet("todos")]
+        public async Task<IActionResult> Todo()
+        {
+            var result = await obtenerClienteHandler.Ejecutar();
             return Ok(result);
         }
     }

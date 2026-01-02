@@ -53,11 +53,15 @@ namespace campo_santo_service.Dominio.Entidades
 
             Estado = EstadoEspacio.Ocupado;
         }
-
         public static Espacio Crear(CodigoContrato codigo, EstadoTipo tipo, NivelesPiso piso, string ubicacion)
         {
             return new Espacio(Guid.CreateVersion7(), codigo, tipo,piso, EstadoEspacio.Disponible, ubicacion);
         }
+        public static Espacio Crear(CodigoContrato codigo)
+        {
+            return new Espacio(Guid.CreateVersion7(), codigo, EstadoTipo.Nicho, NivelesPiso.PlantaBaja, EstadoEspacio.Reservado, "En tramite");
+        }
+
         public static Espacio Rehidratar(Guid id, CodigoContrato codigo, EstadoTipo tipo ,NivelesPiso piso, EstadoEspacio estado, string ubicacion)
         {
             return new Espacio(id, codigo, tipo,piso, estado, ubicacion);
