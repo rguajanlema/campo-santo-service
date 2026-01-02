@@ -14,14 +14,14 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas
         {
             this.clienteRepository = clienteRepository;
         }
-        public async Task<IEnumerable<ClienteResponse>> Ejecutar()
+        public async Task<IEnumerable<ObtenerClienteQuery>> Ejecutar()
         {
             var clientes = await clienteRepository.ObtenerTodos();
             return clientes.Select(Mapear);
         }
-        private static ClienteResponse Mapear(Cliente cliente)
+        private static ObtenerClienteQuery Mapear(Cliente cliente)
         {
-            return new ClienteResponse
+            return new ObtenerClienteQuery
             {
                 Id = cliente.Id,
                 Nombre = cliente.Nombre,

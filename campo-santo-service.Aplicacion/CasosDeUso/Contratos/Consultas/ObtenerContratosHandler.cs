@@ -18,17 +18,17 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Consultas
             this.clienteRepository = clienteRepository;
         }
 
-        public async Task<IEnumerable<ObtenerContrato>> Ejecutar()
+        public async Task<IEnumerable<ObtenerContratoQuery>> Ejecutar()
         {
             var resultContratos = await contratoRepository.ObtenerTodo();
-            var lista = new List<ObtenerContrato>();
+            var lista = new List<ObtenerContratoQuery>();
 
             foreach(var contrato in resultContratos)
             {
                 var resultCliente = await clienteRepository.ObtenerPorId(contrato.ClienteId) ??
                  throw new ExcepcionDeReglaDeNegocio("Cliente no encontrado");
 
-                lista.Add(new ObtenerContrato(
+                lista.Add(new ObtenerContratoQuery(
                     id:contrato.Id,
                     nombre:resultCliente.Nombre,
                     apellido:resultCliente.Apellido,

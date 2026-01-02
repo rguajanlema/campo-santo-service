@@ -1,6 +1,6 @@
 ﻿namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Dtos
 {
-    public class ClienteResponse
+    public class ObtenerClienteQuery
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; } = null!;

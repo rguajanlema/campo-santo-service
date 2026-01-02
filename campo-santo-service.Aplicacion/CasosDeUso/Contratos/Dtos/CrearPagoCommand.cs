@@ -1,6 +1,6 @@
 ﻿namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Dtos
 {
-    public sealed class CrearPagoDto
+    public sealed class CrearPagoCommand
     {
         public DateTime FechaPago { get; set; }
         public decimal Monto { get; set; }

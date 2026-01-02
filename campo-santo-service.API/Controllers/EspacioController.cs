@@ -40,7 +40,7 @@ namespace campo_santo_service.API.Controllers
             return Ok();
         }
         [HttpPost("crear")]
-        public async Task<IActionResult> Crear(CrearEspacioDto request)
+        public async Task<IActionResult> Crear(CrearEspacioCommand request)
         {
             var id = await crearEspacio.Ejecutar(request);
             return CreatedAtAction(nameof(Crear), new { id }, null);

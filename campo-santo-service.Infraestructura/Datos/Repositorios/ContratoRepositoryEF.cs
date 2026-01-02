@@ -21,7 +21,9 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
         public async Task<IEnumerable<Contrato>> ObtenerPorClienteId(Guid id)
         {
-            var entities  = await context.Contratos.Where(c=>c.ClienteId == id).ToArrayAsync();
+            var entities  = await context.Contratos
+            .Where(c=>c.ClienteId == id)
+            .ToArrayAsync();
             var contratos = entities.Select(e => e.ToDomain());
 
             return contratos;
@@ -29,7 +31,9 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
         public async Task<Contrato?> ObtenerPorId(Guid id)
         {
-            var entity = await context.Contratos.Include(c=>c.Pagos).FirstOrDefaultAsync(c => c.Id == id);
+            var entity = await context.Contratos
+            .Include(c=>c.Pagos)
+            .FirstOrDefaultAsync(c => c.Id == id);
             return entity?.ToDomain();
         }
 

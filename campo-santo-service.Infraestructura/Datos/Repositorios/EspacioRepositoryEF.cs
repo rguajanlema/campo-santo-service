@@ -24,7 +24,9 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
 
         public async Task<IEnumerable<Espacio>> ObtenerLibres()
         {
-            var entities = await context.Espacios.Where(x => x.Estado == EstadoEspacio.Disponible.ToString()).ToListAsync();
+            var entities = await context.Espacios
+            .Where(x => x.Estado == EstadoEspacio.Disponible.ToString())
+            .ToListAsync();
             var espacios = entities.Select(e => e.ToDomain());
 
             return espacios;

@@ -11,11 +11,11 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas
         {
             this.repository = repository;
         }
-        public async Task<IEnumerable<DisponibleEspacioDto>> Ejecutar()
+        public async Task<IEnumerable<DisponibleEspacioQuery>> Ejecutar()
         {
             var resultado = await repository.ObtenerLibres();
 
-            return resultado.Select(x=> new DisponibleEspacioDto
+            return resultado.Select(x=> new DisponibleEspacioQuery
             {
                 Id = x.Id,
                 Codigo = x.Codigo.Valor,

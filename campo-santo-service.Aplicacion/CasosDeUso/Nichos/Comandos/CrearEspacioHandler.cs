@@ -17,7 +17,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
             this.repository = repository;
             this.uow = uow;
         }
-        public async Task<Guid> Ejecutar(CrearEspacioDto dto)
+        public async Task<Guid> Ejecutar(CrearEspacioCommand dto)
         {
             var espacio = Espacio.Crear(
                 new CodigoContrato(dto.Codigo),

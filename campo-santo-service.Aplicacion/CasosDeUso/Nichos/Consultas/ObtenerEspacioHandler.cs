@@ -14,7 +14,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas
             this.repository = repository;
         }
 
-        public async Task<ObtenerEspacioDto> Ejecutar(Guid id)
+        public async Task<ObtenerEspacioQuery> Ejecutar(Guid id)
         {
             var resultado = await repository.ObtenerPorId(id);
             if (resultado == null)
@@ -22,7 +22,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Consultas
                 throw new ExcepcionDeReglaDeNegocio($"Error en obtener el espacio: {id}");
             }
 
-            return new ObtenerEspacioDto
+            return new ObtenerEspacioQuery
             {
                 Id = resultado.Id,
                 Codigo = resultado.Codigo.Valor,

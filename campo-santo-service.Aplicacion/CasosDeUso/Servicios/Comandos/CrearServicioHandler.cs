@@ -2,9 +2,6 @@
 using campo_santo_service.Aplicacion.Contratos.Persistencia;
 using campo_santo_service.Dominio.Entidades;
 using campo_santo_service.Dominio.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace campo_santo_service.Aplicacion.CasosDeUso.Servicios.Comandos
 {
@@ -19,7 +16,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Servicios.Comandos
             this.uow = uow;
         }
 
-        public async Task<Guid> Ejecutar(CrearServicioDto request)
+        public async Task<Guid> Ejecutar(CrearServicioCommand request)
         {
             var servicio = Servicio.Crear(request.nombre, request.precio);
 

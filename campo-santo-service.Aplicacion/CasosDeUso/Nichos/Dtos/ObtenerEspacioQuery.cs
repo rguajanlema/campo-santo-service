@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos
+﻿namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos
 {
-    public class ObtenerEspacioDto
+    public class ObtenerEspacioQuery
     {
         public Guid Id { get; set; }
         public string Codigo { get; set; } = null!;

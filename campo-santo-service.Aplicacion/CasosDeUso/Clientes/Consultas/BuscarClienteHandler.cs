@@ -17,7 +17,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas
             this.clienteRepository = clienteRepository;
         }
 
-        public async Task<IEnumerable<ClienteResponse>> Ejecutar(BuscarClienteQuery query)
+        public async Task<IEnumerable<ObtenerClienteQuery>> Ejecutar(BuscarClienteQuery query)
         {
             return query.Tipo switch
             {
@@ -27,33 +27,33 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Clientes.Consultas
                 _ => throw new InvalidOperationException("Tipo de búsqueda no soportado")
             };
         }
-        private async Task<IEnumerable<ClienteResponse>> BuscarPorNombre(string nombre)
+        private async Task<IEnumerable<ObtenerClienteQuery>> BuscarPorNombre(string nombre)
         {
             var clientes = await clienteRepository.ObtenerPorNombre(nombre);
 
             return clientes.Select(Mapear);
         }
-        private async Task<IEnumerable<ClienteResponse>> BuscarPorCedula(string cedula)
+        private async Task<IEnumerable<ObtenerClienteQuery>> BuscarPorCedula(string cedula)
         {
             var cliente = await clienteRepository.ObtenerPorCedula(new Cedula(cedula));
 
             if (cliente is null)
-                return Enumerable.Empty<ClienteResponse>();
+                return Enumerable.Empty<ObtenerClienteQuery>();
 
             return new[] { Mapear(cliente) };
         }
-        private async Task<IEnumerable<ClienteResponse>> BuscarPorContrato(string contrato)
+        private async Task<IEnumerable<ObtenerClienteQuery>> BuscarPorContrato(string contrato)
         {
             var cliente = await clienteRepository.ObtenerPorContrato(contrato);
 
             if (cliente is null)
-                return Enumerable.Empty<ClienteResponse>();
+                return Enumerable.Empty<ObtenerClienteQuery>();
 
             return new[] { Mapear(cliente) };
         }
-        private static ClienteResponse Mapear(Cliente cliente)
+        private static ObtenerClienteQuery Mapear(Cliente cliente)
         {
-            return new ClienteResponse {
+            return new ObtenerClienteQuery {
                 Id = cliente.Id,
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,

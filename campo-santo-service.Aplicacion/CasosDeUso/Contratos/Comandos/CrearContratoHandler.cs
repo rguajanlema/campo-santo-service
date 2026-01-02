@@ -3,6 +3,7 @@ using campo_santo_service.Aplicacion.Common;
 using campo_santo_service.Aplicacion.Contratos.Persistencia;
 using campo_santo_service.Dominio.Entidades;
 using campo_santo_service.Dominio.Enums;
+using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
 using campo_santo_service.Dominio.Repositorios;
 
@@ -17,7 +18,8 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
         private readonly IEspacioRepository espacioRepository;
         
 
-        public CrearContratoHandler(IUnidadDeTrabajo uow, 
+        public CrearContratoHandler(
+            IUnidadDeTrabajo uow, 
             IClienteRepository clienteRepository,
             IContratoRepository contratoRepository,
             IEspacioRepository espacioRepository
@@ -49,10 +51,12 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
             }
 
 
-            var ultimoEspacio = await espacioRepository.ObtenerUltimo();
-            var ultimoContrato = await contratoRepository.ObtenerUltimo();
-
+            var ultimoEspacio = await espacioRepository.ObtenerUltimo() ??
+            throw new ExcepcionDeReglaDeNegocio("Error, no hay espacios");
             var codigo = ultimoEspacio.Codigo.GenerarSiguiente();
+
+            var ultimoContrato = await contratoRepository.ObtenerUltimo()??
+            throw new ExcepcionDeReglaDeNegocio("Error, ho hay contratos");
             var codigoContrato = ultimoContrato.Codigo.GenerarSiguiente();
 
             var espacio = Espacio.Crear(codigo);

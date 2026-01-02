@@ -17,18 +17,22 @@ namespace campo_santo_service.Infraestructura.Datos.Repositorios
         }
         public async Task Agregar(Cliente cliente)
         {
-            await context.Clientes.AddAsync(SociosEntity.FromDomain(cliente));
+            await context.Clientes
+            .AddAsync(SociosEntity.FromDomain(cliente));
         }
 
         public async Task<Cliente?> ObtenerPorCedula(Cedula cedula)
         {
-            var entity = await context.Clientes.SingleOrDefaultAsync(c=>c.Cedula == cedula.Valor);
+            var entity = await context.Clientes
+            .SingleOrDefaultAsync(c=>c.Cedula == cedula.Valor);
             return entity?.ToDomain();
         }
 
         public async Task<Cliente?> ObtenerPorContrato(string codigoContrato)
         {
-            var entity = await context.Contratos.Include(c=>c.Cliente).SingleOrDefaultAsync(c => c.Codigo == codigoContrato);
+            var entity = await context.Contratos
+            .Include(c=>c.Cliente)
+            .SingleOrDefaultAsync(c => c.Codigo == codigoContrato);
             return entity?.Cliente?.ToDomain();
         }
 

@@ -12,10 +12,10 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Servicios.Consultas
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<TodoServicioDto>> Ejecutar()
+        public async Task<IEnumerable<TodoServicioQuery>> Ejecutar()
         {
             var resultados = await repository.ObtenerTodo();
-            var lista = resultados.Select(resultado => new TodoServicioDto(
+            var lista = resultados.Select(resultado => new TodoServicioQuery(
                 id:resultado.Id,
                 nombre:resultado.Nombre,
                 precio:resultado.Precio
