@@ -1,6 +1,4 @@
 ﻿using campo_santo_service.Dominio.Excepciones;
-using System;
-using System.Collections.Generic;
 namespace campo_santo_service.Dominio.ObjetosDeValor
 {
     public record Cedula

@@ -1,6 +1,6 @@
 ﻿namespace campo_santo_service.Dominio.Enums
 {
-    public enum EnumParentesco
+    public enum EstadoParentesco
     {
         Conyugue,
         Hijo,

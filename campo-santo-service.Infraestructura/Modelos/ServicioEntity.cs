@@ -27,7 +27,11 @@ namespace campo_santo_service.Infraestructura.Modelos
 
         public Servicio ToDomain()
         {
-            return Servicio.Rehidratar(Id, Nombre,Precio);
+            return Servicio.Rehidratar(
+                Id, 
+                Nombre,
+                Precio
+                );
         }
     }
 }
