@@ -1,9 +1,11 @@
 ﻿using campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos;
 using campo_santo_service.Aplicacion.Contratos.Persistencia;
+using campo_santo_service.Aplicacion.Excepciones;
 using campo_santo_service.Dominio.Entidades;
 using campo_santo_service.Dominio.Enums;
 using campo_santo_service.Dominio.ObjetosDeValor;
 using campo_santo_service.Dominio.Repositorios;
+using FluentValidation;
 
 namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
 {
@@ -11,26 +13,44 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
     {
         private readonly IEspacioRepository repository;
         private readonly IUnidadDeTrabajo uow;
+        private readonly IValidator<ComandoCrearEspacio> validador;
 
-        public CrearEspacioHandler(IEspacioRepository repository, IUnidadDeTrabajo uow)
+        public CrearEspacioHandler(IEspacioRepository repository, IUnidadDeTrabajo uow,
+            IValidator<ComandoCrearEspacio> validador)
         {
             this.repository = repository;
             this.uow = uow;
+            this.validador = validador;
         }
-        public async Task<Guid> Ejecutar(CrearEspacioCommand dto)
+        public async Task<Guid> Ejecutar(ComandoCrearEspacio dto)
         {
-            var espacio = Espacio.Crear(
+            var resultadoValidacion = await validador.ValidateAsync(dto);
+
+            if (!resultadoValidacion.IsValid)
+            {
+                throw new ExcepcionDeValidacion(resultadoValidacion);
+            }
+
+            try
+            {
+                var espacio = Espacio.Crear(
                 new CodigoContrato(dto.Codigo),
                 Enum.Parse<EstadoTipo>(dto.Tipo),
                 Enum.Parse<NivelesPiso>(dto.Piso),
                 dto.Ubicacion
             );
 
-            await repository.Agregar(espacio);
+                await repository.Agregar(espacio);
 
-            await uow.CommitAsync();
+                await uow.CommitAsync();
 
-            return espacio.Id;
+                return espacio.Id;
+            }
+            catch (Exception)
+            {
+                await uow.Reversar();
+                throw;
+            }
         }
     }
 }

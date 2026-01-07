@@ -3,7 +3,7 @@
     public interface IUnidadDeTrabajo
     {
         Task Persistir();
-        Task Reversar();
+        void Reversar();
         Task CommitAsync();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Dtos
 {
-    public sealed class CrearEspacioCommand
+    public sealed class ComandoCrearEspacio
     {
         public string Codigo { get; set; } = null!;
         public string Tipo { get; set; } = null!;

@@ -1,5 +1,6 @@
 ﻿using campo_santo_service.Aplicacion.Contratos.Persistencia;
 using campo_santo_service.Infraestructura.Datos.Contexto;
+using Microsoft.EntityFrameworkCore;
 
 namespace campo_santo_service.Infraestructura.Datos.UnitOfWork
 {
@@ -16,14 +17,31 @@ namespace campo_santo_service.Infraestructura.Datos.UnitOfWork
             await context.SaveChangesAsync();
         }
 
-        public Task Persistir()
+        public async Task Persistir()
         {
-            throw new NotImplementedException();
+            await context.SaveChangesAsync();
         }
 
-        public Task Reversar()
+        public void Reversar()
         {
-            throw new NotImplementedException();
+            foreach (var entry in context.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                        entry.CurrentValues.SetValues(entry.OriginalValues);
+                        entry.State = EntityState.Unchanged;
+                        break;
+
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
+
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Unchanged;
+                        break;
+                }
+            }
         }
     }
 }

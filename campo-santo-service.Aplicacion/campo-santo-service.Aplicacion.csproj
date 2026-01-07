@@ -9,7 +9,10 @@
 
   <ItemGroup>
     <Folder Include="Contratos\Repositorios\" />
-    <Folder Include="Excepciones\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
   </ItemGroup>
 
   <ItemGroup>

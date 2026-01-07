@@ -10,9 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="MSTest" Version="4.0.1" />
+    <PackageReference Include="NSubstitute" Version="5.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\campo-santo-service.Aplicacion\campo-santo-service.Aplicacion.csproj" />
     <ProjectReference Include="..\campo-santo-service.Dominio\campo-santo-service.Dominio.csproj" />
   </ItemGroup>
 
