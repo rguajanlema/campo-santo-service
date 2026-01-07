@@ -7,7 +7,7 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
     public class TelefonoTest
     {
         [TestMethod]
-        public void Constructor_Telefono_LanzaExepcion()
+        public void Constructor_Telefono_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Telefono(null!));
         }
@@ -22,12 +22,12 @@ namespace campo_santo_service.Pruebas.ObjetosDeValor
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Telefono("0981124"));
         }
         [TestMethod]
-        public void Constructor_TelefonoBasio_LanzaExcepcion()
+        public void Constructor_TelefonoVacio_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Telefono(""));
         }
         [TestMethod]
-        public void Constructor_Telefono_NoLanzaException()
+        public void Constructor_Telefono_NoLanzaExcepcion()
         {
             var telefono = new Telefono("0981124583").Valor;
             Assert.IsNotNull(telefono);

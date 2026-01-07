@@ -9,7 +9,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
     public class ContratoTest
     {
         [TestMethod]
-        public void Constructor_NumeroContratoNull_LanzaExcepcio()
+        public void Constructor_NumeroContratoNull_LanzaExcepcion()
         {
             var monto = 100;
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
@@ -26,7 +26,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Constructor_MontoCero_LanzaExcepcio()
+        public void Constructor_MontoCero_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
@@ -42,7 +42,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Constructor_MontoMenorCero_LanzaExcepcio()
+        public void Constructor_MontoMenorCero_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
@@ -58,7 +58,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Rehidratar_NoLanzaExcepcio()
+        public void Rehidratar_NoLanzaExcepcion()
         {
             var contrato = Contrato.Reidratar(
                 Guid.CreateVersion7(),

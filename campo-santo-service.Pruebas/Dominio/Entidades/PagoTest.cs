@@ -9,7 +9,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
     public class PagoTest
     {
         [TestMethod]
-        public void Constructor_MontoMenoCero_LanzaExcepcion()
+        public void Constructor_MontoMenorCero_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.RegistarPago(
                 Guid.CreateVersion7(),
