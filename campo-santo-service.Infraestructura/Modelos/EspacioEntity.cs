@@ -38,8 +38,8 @@ namespace campo_santo_service.Infraestructura.Modelos
             return Espacio.Rehidratar(
                 Id,
                 new Dominio.ObjetosDeValor.CodigoContrato(Codigo),
-                Enum.Parse<EstadoTipo>(Tipo),
-                Enum.Parse<NivelesPiso>(Piso),
+                Enum.Parse<TipoEspacio>(Tipo),
+                Enum.Parse<NivelPiso>(Piso),
                 Enum.Parse<EstadoEspacio>(Estado),
                 Ubicacion
                 );

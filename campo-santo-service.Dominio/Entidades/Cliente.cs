@@ -106,7 +106,7 @@ namespace campo_santo_service.Dominio.Entidades
             CodigoContrato codigo,
             FechaContrato fechaInicio,
             DateTime fechaFinaliza,
-            EnumContrato tipo,
+            PeriodicidadContrato tipo,
             EstadoContrato estado,
             string observacion,
             decimal monto,

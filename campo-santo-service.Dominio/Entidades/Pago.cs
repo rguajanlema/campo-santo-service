@@ -10,7 +10,7 @@ namespace campo_santo_service.Dominio.Entidades
         public Guid ContratoId { get; private set; }
         public FechaContrato FechaPago { get; private set; }
         public decimal Monto { get; private set; }
-        public EstadoConceptos Concepto { get; private set; }
+        public EstadoConcepto Concepto { get; private set; }
         public string Observacion { get; private set; } = null!;
 
         private Pago(
@@ -18,7 +18,7 @@ namespace campo_santo_service.Dominio.Entidades
             Guid contratoId, 
             FechaContrato fechaPago, 
             decimal monto, 
-            EstadoConceptos concepto, 
+            EstadoConcepto concepto, 
             string observacion
             )
         {
@@ -43,7 +43,7 @@ namespace campo_santo_service.Dominio.Entidades
             Guid contratoId, 
             FechaContrato fecha, 
             decimal monto, 
-            EstadoConceptos concepto, 
+            EstadoConcepto concepto, 
             string observacion 
             )
         {
@@ -62,7 +62,7 @@ namespace campo_santo_service.Dominio.Entidades
             Guid contratoId, 
             FechaContrato fechaPago, 
             decimal monto, 
-            EstadoConceptos concepto, 
+            EstadoConcepto concepto, 
             string observacion
             )
         {
@@ -88,7 +88,7 @@ namespace campo_santo_service.Dominio.Entidades
                 contratoId,
                 fecha,
                 monto,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 descripcion
             );
         }

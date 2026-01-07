@@ -15,7 +15,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow),
                 -10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 "Inicio contrato"
                 ));
         }
@@ -26,7 +26,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow),
                 10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 null!
                 ));
         }
@@ -37,7 +37,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow.AddDays(1)),
                 10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 null!
                 ));
         }
@@ -48,7 +48,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow.AddDays(-11)),
                 10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 "Finaliza contrato"
                 );
         }
@@ -60,7 +60,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow),
                 10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 "Inicio contrato"
                 );
         }
@@ -72,7 +72,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new FechaContrato(DateTime.UtcNow),
                 10,
-                EstadoConceptos.Inicio,
+                EstadoConcepto.Inicio,
                 "Inicio contrato"
                 );
         }

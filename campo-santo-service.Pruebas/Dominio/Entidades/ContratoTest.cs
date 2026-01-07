@@ -15,7 +15,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato(null!),
                 Guid.CreateVersion7(),
-                EnumContrato.Anual,
+                    PeriodicidadContrato.Anual,
                 monto,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
@@ -31,7 +31,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
                 Guid.CreateVersion7(),
-                EnumContrato.Anual,
+                    PeriodicidadContrato.Anual,
                 0,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
@@ -47,7 +47,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Contrato.Crear(
                 new CodigoContrato("C-0001"),
                 Guid.CreateVersion7(),
-                EnumContrato.Anual,
+                    PeriodicidadContrato.Anual,
                 -10,
                 new FechaContrato(DateTime.UtcNow),
                 Guid.CreateVersion7(),
@@ -64,7 +64,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 Guid.CreateVersion7(),
                 new CodigoContrato("C-0001"),
                 Guid.CreateVersion7(),
-                EnumContrato.Anual,
+                    PeriodicidadContrato.Anual,
                 10,
                 new FechaContrato(DateTime.UtcNow),
                 DateTime.UtcNow.AddYears(10),
@@ -82,7 +82,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             var contrato = Contrato.Crear(
                 new CodigoContrato("C-0001"),
                 Guid.CreateVersion7(),
-                EnumContrato.Anual,
+                    PeriodicidadContrato.Anual,
                 10,
                 new FechaContrato(fechaBase),
                 Guid.CreateVersion7(),

@@ -68,7 +68,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Contratos.Comandos
             var contrato = Contrato.Crear(
                 codigoContrato,
                 cliente.Id,
-                Enum.Parse<EnumContrato>(dto.TipoContrato),
+                Enum.Parse<PeriodicidadContrato>(dto.TipoContrato),
                 dto.Monto,
                 new FechaContrato(DateTimeNormalizer.ToUtc(dto.FechaInicio)),
                 espacio.Id,

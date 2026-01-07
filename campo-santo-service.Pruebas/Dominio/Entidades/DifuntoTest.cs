@@ -14,7 +14,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Difunto(
                 null!,
                 "Cardenas",
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 new Cedula("100000000-0"),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
@@ -27,7 +27,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Difunto(
                 "Cristian",
                 null!,
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 new Cedula("100000000-0"),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
@@ -40,7 +40,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Difunto(
                 "Cristian",
                 "Yamberla",
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 null!,
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
@@ -53,7 +53,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Difunto(
                 "Cristian",
                 "Yamberla",
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 new Cedula("100000000-0"),
                 null!,
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-1))
@@ -66,7 +66,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => new Difunto(
                 "Cristian",
                 "Yamberla",
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 new Cedula("100000000-0"),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 null!
@@ -79,7 +79,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             var difunto = new Difunto(
                 "Jose",
                 "Yamberla",
-                EstadoGenero.Femenino,
+                Genero.Femenino,
                 new Cedula("100000000-0"),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-10)),
                 new FechaNacimiento(DateTime.UtcNow.AddDays(-1))

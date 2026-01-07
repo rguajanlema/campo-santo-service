@@ -13,7 +13,7 @@ namespace campo_santo_service.Pruebas.Aplicacion.CasosDeUso.Nichos
     public class CasoDeUsoCrearEspacioTest
     {
         private IEspacioRepository repository;
-        private IValidator<ComandoCrearEspacio> validator;
+        private IValidator<CrearEspacioCommand> validator;
         private IUnidadDeTrabajo unidadDeTrabajo;
         private CrearEspacioHandler casoDeUso;
 
@@ -21,7 +21,7 @@ namespace campo_santo_service.Pruebas.Aplicacion.CasosDeUso.Nichos
         public void Setup()
         {
             repository = Substitute.For<IEspacioRepository>();
-            validator = Substitute.For<IValidator<ComandoCrearEspacio>>();
+            validator = Substitute.For<IValidator<CrearEspacioCommand>>();
             unidadDeTrabajo = Substitute.For<IUnidadDeTrabajo>();
             casoDeUso = Substitute.For<CrearEspacioHandler>();
         }
@@ -29,7 +29,7 @@ namespace campo_santo_service.Pruebas.Aplicacion.CasosDeUso.Nichos
         [TestMethod]
         public async Task Handle_ComandoValido_ObtenemosIdNicho()
         {
-            var comando = new ComandoCrearEspacio { Codigo = "000-1" };
+            var comando = new CrearEspacioCommand { Codigo = "000-1" };
             validator.ValidateAsync(comando).Returns(new ValidationResult());
         }
     }

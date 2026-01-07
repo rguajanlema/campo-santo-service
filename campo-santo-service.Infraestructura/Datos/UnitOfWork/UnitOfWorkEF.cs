@@ -17,11 +17,6 @@ namespace campo_santo_service.Infraestructura.Datos.UnitOfWork
             await context.SaveChangesAsync();
         }
 
-        public async Task Persistir()
-        {
-            await context.SaveChangesAsync();
-        }
-
         public void Reversar()
         {
             foreach (var entry in context.ChangeTracker.Entries())

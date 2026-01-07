@@ -8,12 +8,12 @@ namespace campo_santo_service.Dominio.Entidades
     {
         public Guid Id { get; private set; }
         public CodigoContrato Codigo { get; private set; } = null!;
-        public EstadoTipo Tipo { get; private set; }
-        public NivelesPiso Piso { get; private set; }
+        public TipoEspacio Tipo { get; private set; }
+        public NivelPiso Piso { get; private set; }
         public EstadoEspacio Estado { get; private set; }
         public string Ubicacion { get; private set; } = null!;
 
-        internal Espacio(Guid id, CodigoContrato codigo, EstadoTipo tipo,NivelesPiso piso, EstadoEspacio estado, string ubicacion) { 
+        internal Espacio(Guid id, CodigoContrato codigo, TipoEspacio tipo,NivelPiso piso, EstadoEspacio estado, string ubicacion) { 
             if(codigo == null)
             {
                 throw new ExcepcionDeReglaDeNegocio($"El {nameof(codigo)} es obligatorio");
@@ -32,15 +32,15 @@ namespace campo_santo_service.Dominio.Entidades
         }
         public void AgregarPiso()
         {
-            if (Piso == NivelesPiso.TercerPiso)
+            if (Piso == NivelPiso.TercerPiso)
                 throw new ExcepcionDeReglaDeNegocio("No se puede agregar un cuarto piso");
 
             Piso = Piso switch
             {
-                NivelesPiso.SubSuelo => NivelesPiso.PlantaBaja,
-                NivelesPiso.PlantaBaja => NivelesPiso.PrimerPiso,
-                NivelesPiso.PrimerPiso => NivelesPiso.SegundoPiso,
-                NivelesPiso.SegundoPiso => NivelesPiso.TercerPiso,
+                NivelPiso.SubSuelo => NivelPiso.PlantaBaja,
+                NivelPiso.PlantaBaja => NivelPiso.PrimerPiso,
+                NivelPiso.PrimerPiso => NivelPiso.SegundoPiso,
+                NivelPiso.SegundoPiso => NivelPiso.TercerPiso,
                 _ => Piso
             };
             
@@ -53,16 +53,16 @@ namespace campo_santo_service.Dominio.Entidades
 
             Estado = EstadoEspacio.Ocupado;
         }
-        public static Espacio Crear(CodigoContrato codigo, EstadoTipo tipo, NivelesPiso piso, string ubicacion)
+        public static Espacio Crear(CodigoContrato codigo, TipoEspacio tipo, NivelPiso piso, string ubicacion)
         {
             return new Espacio(Guid.CreateVersion7(), codigo, tipo,piso, EstadoEspacio.Disponible, ubicacion);
         }
         public static Espacio Crear(CodigoContrato codigo)
         {
-            return new Espacio(Guid.CreateVersion7(), codigo, EstadoTipo.Nicho, NivelesPiso.PlantaBaja, EstadoEspacio.Reservado, "En tramite");
+            return new Espacio(Guid.CreateVersion7(), codigo, TipoEspacio.Nicho, NivelPiso.PlantaBaja, EstadoEspacio.Reservado, "En tramite");
         }
 
-        public static Espacio Rehidratar(Guid id, CodigoContrato codigo, EstadoTipo tipo ,NivelesPiso piso, EstadoEspacio estado, string ubicacion)
+        public static Espacio Rehidratar(Guid id, CodigoContrato codigo, TipoEspacio tipo ,NivelPiso piso, EstadoEspacio estado, string ubicacion)
         {
             return new Espacio(id, codigo, tipo,piso, estado, ubicacion);
         }

@@ -13,16 +13,16 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
     {
         private readonly IEspacioRepository repository;
         private readonly IUnidadDeTrabajo uow;
-        private readonly IValidator<ComandoCrearEspacio> validador;
+        private readonly IValidator<CrearEspacioCommand> validador;
 
         public CrearEspacioHandler(IEspacioRepository repository, IUnidadDeTrabajo uow,
-            IValidator<ComandoCrearEspacio> validador)
+            IValidator<CrearEspacioCommand> validador)
         {
             this.repository = repository;
             this.uow = uow;
             this.validador = validador;
         }
-        public async Task<Guid> Ejecutar(ComandoCrearEspacio dto)
+        public async Task<Guid> Ejecutar(CrearEspacioCommand dto)
         {
             var resultadoValidacion = await validador.ValidateAsync(dto);
 
@@ -35,8 +35,8 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
             {
                 var espacio = Espacio.Crear(
                 new CodigoContrato(dto.Codigo),
-                Enum.Parse<EstadoTipo>(dto.Tipo),
-                Enum.Parse<NivelesPiso>(dto.Piso),
+                Enum.Parse<TipoEspacio>(dto.Tipo),
+                Enum.Parse<NivelPiso>(dto.Piso),
                 dto.Ubicacion
             );
 
@@ -48,7 +48,7 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
             }
             catch (Exception)
             {
-                await uow.Reversar();
+                uow.Reversar();
                 throw;
             }
         }

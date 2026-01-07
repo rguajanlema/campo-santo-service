@@ -2,7 +2,6 @@
 {
     public interface IUnidadDeTrabajo
     {
-        Task Persistir();
         void Reversar();
         Task CommitAsync();
     }

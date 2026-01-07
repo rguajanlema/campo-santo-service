@@ -71,7 +71,7 @@ namespace campo_santo_service.Infraestructura.Modelos
                 Id,
                 new CodigoContrato(Codigo),
                 ClienteId,
-                Enum.Parse<EnumContrato>(TipoContrato),
+                Enum.Parse<PeriodicidadContrato>(TipoContrato),
                 Monto,
                 new FechaContrato(FechaInicio),
                 FechaFin,
@@ -85,7 +85,7 @@ namespace campo_santo_service.Infraestructura.Modelos
                     pago.Id,
                     new FechaContrato(pago.FechaPago),
                     pago.Monto,
-                    Enum.Parse<EstadoConceptos>(pago.Concepto),
+                    Enum.Parse<EstadoConcepto>(pago.Concepto),
                     pago.Observacion
                 );
             }

@@ -14,8 +14,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Espacio.Rehidratar(
                 Guid.CreateVersion7(),
                 null!,
-                EstadoTipo.Boveda,
-                NivelesPiso.PlantaBaja,
+                TipoEspacio.Boveda,
+                NivelPiso.PlantaBaja,
                 EstadoEspacio.Disponible,
                 "Crento"
                 )
@@ -27,8 +27,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Espacio.Rehidratar(
                 Guid.CreateVersion7(),
                 new CodigoContrato("N-0001"),
-                EstadoTipo.Boveda,
-                NivelesPiso.PlantaBaja,
+                TipoEspacio.Boveda,
+                NivelPiso.PlantaBaja,
                 EstadoEspacio.Disponible,
                 null!
                 )
@@ -40,8 +40,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Espacio.Rehidratar(
                 Guid.CreateVersion7(),
                 new CodigoContrato("N-0001"),
-                EstadoTipo.Boveda,
-                NivelesPiso.PlantaBaja,
+                TipoEspacio.Boveda,
+                NivelPiso.PlantaBaja,
                 EstadoEspacio.Disponible,
                 "Centro"
                 );
@@ -52,8 +52,8 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Espacio.Rehidratar(
                 Guid.CreateVersion7(),
                 new CodigoContrato("N-0001"),
-                EstadoTipo.Boveda,
-                NivelesPiso.TercerPiso,
+                TipoEspacio.Boveda,
+                NivelPiso.TercerPiso,
                 EstadoEspacio.Disponible,
                 "Centro"
                 ).AgregarPiso());
@@ -64,15 +64,15 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             var nicho = Espacio.Rehidratar(
                 Guid.CreateVersion7(),
                 new CodigoContrato("N-0001"),
-                EstadoTipo.Boveda,
-                NivelesPiso.PrimerPiso,
+                TipoEspacio.Boveda,
+                NivelPiso.PrimerPiso,
                 EstadoEspacio.Disponible,
                 "Centro"
                 );
 
             nicho.AgregarPiso();
             
-            Assert.AreEqual(NivelesPiso.SegundoPiso, nicho.Piso);
+            Assert.AreEqual(NivelPiso.SegundoPiso, nicho.Piso);
         }
     }
 }
