@@ -21,7 +21,7 @@ namespace campo_santo_service.Dominio.Entidades
             EstadoEspacio estado, 
             string ubicacion
             ) { 
-            if(codigo.Valor == null)
+            if (codigo == null || codigo.Valor == null)
             {
                 throw new ExcepcionDeReglaDeNegocio($"El {nameof(codigo)} es obligatorio");
             }

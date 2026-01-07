@@ -29,7 +29,7 @@ namespace campo_santo_service.Pruebas.Aplicacion.CasosDeUso.Nichos
         [TestMethod]
         public async Task Handle_ComandoValido_ObtenemosIdNicho()
         {
-            var comando = new CrearEspacioCommand { Codigo = "000-1", Tipo = "Nicho", Piso = "PlantaBaja", Ubicacion = "Centro" };
+            var comando = new CrearEspacioCommand { Codigo = "C-0001", Tipo = "Nicho", Piso = "PlantaBaja", Ubicacion = "Centro" };
             validator.ValidateAsync(comando).Returns(new ValidationResult());
             repository.Agregar(Arg.Any<campo_santo_service.Dominio.Entidades.Espacio>()).Returns(Task.CompletedTask);
             unidadDeTrabajo.CommitAsync().Returns(Task.CompletedTask);
