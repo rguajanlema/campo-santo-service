@@ -67,7 +67,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         }
         public Contrato ToDomain()
         {
-            var contrato = Contrato.Reidratar(
+            var contrato = Contrato.Rehidratar(
                 Id,
                 new CodigoContrato(Codigo),
                 ClienteId,

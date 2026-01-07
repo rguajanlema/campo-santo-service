@@ -60,7 +60,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         [TestMethod]
         public void Rehidratar_NoLanzaExcepcion()
         {
-            var contrato = Contrato.Reidratar(
+            var contrato = Contrato.Rehidratar(
                 Guid.CreateVersion7(),
                 new CodigoContrato("C-0001"),
                 Guid.CreateVersion7(),

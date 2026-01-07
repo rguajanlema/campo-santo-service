@@ -39,7 +39,7 @@ namespace campo_santo_service.Infraestructura.Modelos
         }
         public Cliente ToDomain()
         {
-            return Cliente.Reidatar(
+            return Cliente.Rehidratar(
                 Id,
                 Nombre,
                 Apellido,

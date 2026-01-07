@@ -13,8 +13,15 @@ namespace campo_santo_service.Dominio.Entidades
         public EstadoEspacio Estado { get; private set; }
         public string Ubicacion { get; private set; } = null!;
 
-        internal Espacio(Guid id, CodigoContrato codigo, TipoEspacio tipo,NivelPiso piso, EstadoEspacio estado, string ubicacion) { 
-            if(codigo == null)
+        internal Espacio(
+            Guid id, 
+            CodigoContrato codigo, 
+            TipoEspacio tipo,
+            NivelPiso piso, 
+            EstadoEspacio estado, 
+            string ubicacion
+            ) { 
+            if(codigo.Valor == null)
             {
                 throw new ExcepcionDeReglaDeNegocio($"El {nameof(codigo)} es obligatorio");
             }
@@ -53,18 +60,51 @@ namespace campo_santo_service.Dominio.Entidades
 
             Estado = EstadoEspacio.Ocupado;
         }
-        public static Espacio Crear(CodigoContrato codigo, TipoEspacio tipo, NivelPiso piso, string ubicacion)
+        public static Espacio Crear(
+            CodigoContrato codigo, 
+            TipoEspacio tipo, 
+            NivelPiso piso, 
+            string ubicacion
+            )
         {
-            return new Espacio(Guid.CreateVersion7(), codigo, tipo,piso, EstadoEspacio.Disponible, ubicacion);
+            return new Espacio(
+                Guid.CreateVersion7(), 
+                codigo, 
+                tipo,
+                piso, 
+                EstadoEspacio.Disponible, 
+                ubicacion
+                );
         }
         public static Espacio Crear(CodigoContrato codigo)
         {
-            return new Espacio(Guid.CreateVersion7(), codigo, TipoEspacio.Nicho, NivelPiso.PlantaBaja, EstadoEspacio.Reservado, "En tramite");
+            return new Espacio(
+                Guid.CreateVersion7(), 
+                codigo, 
+                TipoEspacio.Nicho, 
+                NivelPiso.PlantaBaja, 
+                EstadoEspacio.Reservado, 
+                "En tramite"
+                );
         }
 
-        public static Espacio Rehidratar(Guid id, CodigoContrato codigo, TipoEspacio tipo ,NivelPiso piso, EstadoEspacio estado, string ubicacion)
+        public static Espacio Rehidratar(
+            Guid id, 
+            CodigoContrato codigo, 
+            TipoEspacio tipo,
+            NivelPiso piso, 
+            EstadoEspacio estado, 
+            string ubicacion
+            )
         {
-            return new Espacio(id, codigo, tipo,piso, estado, ubicacion);
+            return new Espacio(
+                id, 
+                codigo, 
+                tipo,
+                piso, 
+                estado, 
+                ubicacion
+                );
         }
 
     }

@@ -81,7 +81,7 @@ namespace campo_santo_service.Dominio.Entidades
                 );
         }
 
-        public static Cliente Reidatar(
+        public static Cliente Rehidratar(
             Guid id, 
             string nombre, 
             string apellido, 
@@ -115,7 +115,7 @@ namespace campo_santo_service.Dominio.Entidades
             )
         {
             _contratos.Add(
-                Contrato.Reidratar(
+                Contrato.Rehidratar(
                     id,
                     codigo,
                     clienteId,

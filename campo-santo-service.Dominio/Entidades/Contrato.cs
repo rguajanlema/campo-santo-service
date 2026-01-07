@@ -99,7 +99,7 @@ namespace campo_santo_service.Dominio.Entidades
             return contrato;
         }
 
-        public static Contrato Reidratar(
+        public static Contrato Rehidratar(
             Guid id,
             CodigoContrato numeroContrato,
             Guid clienteId,
