@@ -12,10 +12,10 @@ namespace campo_santo_service.Pruebas.Aplicacion.CasosDeUso.Nichos
     [TestClass]
     public class CasoDeUsoCrearEspacioTest
     {
-        private IEspacioRepository repository;
-        private IValidator<CrearEspacioCommand> validator;
-        private IUnidadDeTrabajo unidadDeTrabajo;
-        private CrearEspacioHandler casoDeUso;
+        private IEspacioRepository repository = null!;
+        private IValidator<CrearEspacioCommand> validator = null!;
+        private IUnidadDeTrabajo unidadDeTrabajo = null!;
+        private CrearEspacioHandler casoDeUso = null!;
 
         [TestInitialize]
         public void Setup()
