@@ -1,5 +1,4 @@
-﻿using campo_santo_service.Dominio.Enums;
-using campo_santo_service.Dominio.Excepciones;
+﻿using campo_santo_service.Dominio.Excepciones;
 using campo_santo_service.Dominio.ObjetosDeValor;
 
 namespace campo_santo_service.Dominio.Entidades
@@ -9,10 +8,10 @@ namespace campo_santo_service.Dominio.Entidades
         public Guid Id { get; private set; }
         public string Nombre { get; private set; } = null!;
         public string Apellido { get; private set; } = null!;
-        public string Direccion {  get; private set; }
+        public string Direccion { get; private set; } = null!;
         public Cedula Cedula { get; private set; } = null!;
         public Email Email { get; private set; } = null!;
-        public Telefono Telefono { get; private set; } = null !;
+        public Telefono Telefono { get; private set; } = null!;
 
         private readonly List<Contrato> _contratos = new();
         public IReadOnlyCollection<Contrato> Contratos => _contratos;
@@ -101,33 +100,24 @@ namespace campo_santo_service.Dominio.Entidades
                 telefono
                 );
         }
-        public void RehidratarContrato(
-            Guid id,
-            CodigoContrato codigo,
-            FechaContrato fechaInicio,
-            DateTime fechaFinaliza,
-            PeriodicidadContrato tipo,
-            EstadoContrato estado,
-            string observacion,
-            decimal monto,
-            Guid clienteId,
-            Guid espacioId
-            )
+
+        public void RegistrarContrato(Contrato contrato)
         {
-            _contratos.Add(
-                Contrato.Rehidratar(
-                    id,
-                    codigo,
-                    clienteId,
-                    tipo,
-                    monto,
-                    fechaInicio,
-                    fechaFinaliza,
-                    espacioId,
-                    estado,
-                    observacion
-                    )
-                );
+            if (contrato.ClienteId != Id)
+            {
+                throw new ExcepcionDeReglaDeNegocio("El contrato no pertenece a este cliente");
+            }
+
+            if (_contratos.Any(c => c.Id == contrato.Id))
+            {
+                return;
+            }
+            _contratos.Add(contrato);
+        }
+
+        public void RehidratarContrato(Contrato contrato)
+        {
+            _contratos.Add(contrato);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
     public class PagoTest
     {
         [TestMethod]
-        public void Constructor_MontoMenorCero_LanzaExcepcion()
+        public void RegistarPago_MontoMenorCero_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.RegistarPago(
                 Guid.CreateVersion7(),
@@ -20,7 +20,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Constructor_ObservacionNull_LanzaExcepcion()
+        public void RegistarPago_ObservacionNull_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.RegistarPago(
                 Guid.CreateVersion7(),
@@ -31,7 +31,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Constructor_FechaMayor_LanzaExcepcion()
+        public void RegistarPago_FechaMayor_LanzaExcepcion()
         {
             Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.RegistarPago(
                 Guid.CreateVersion7(),
@@ -42,7 +42,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 ));
         }
         [TestMethod]
-        public void Constructor_FechaMenor_NoLanzaExcepcion()
+        public void RegistarPago_FechaMenor_NoLanzaExcepcion()
         {
             Pago.RegistarPago(
                 Guid.CreateVersion7(),
@@ -54,7 +54,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
         }
 
         [TestMethod]
-        public void Constructor_NoLanzaExcepcion()
+        public void RegistarPago_NoLanzaExcepcion()
         {
             Pago.RegistarPago(
                 Guid.CreateVersion7(),
@@ -65,7 +65,7 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 );
         }
         [TestMethod]
-        public void Constructor_Refrescar_NoLanzaExcepcion()
+        public void Rehidratar_NoLanzaExcepcion()
         {
             Pago.Rehidratar(
                 Guid.CreateVersion7(),
@@ -75,6 +75,42 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
                 EstadoConcepto.Inicio,
                 "Inicio contrato"
                 );
+        }
+        [TestMethod]
+        public void Rehidratar_MontoMenorCero_LanzaExcepcion()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.Rehidratar(
+                Guid.CreateVersion7(),
+                Guid.CreateVersion7(),
+                new FechaContrato(DateTime.UtcNow),
+                -10,
+                EstadoConcepto.Inicio,
+                "Inicio contrato"
+                ));
+        }
+        [TestMethod]
+        public void Rehidratar_ObservacionNull_LanzaExcepcion()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.Rehidratar(
+                Guid.CreateVersion7(),
+                Guid.CreateVersion7(),
+                new FechaContrato(DateTime.UtcNow),
+                10,
+                EstadoConcepto.Inicio,
+                null!
+                ));
+        }
+        [TestMethod]
+        public void Rehidratar_FechaMayor_LanzaExcepcion()
+        {
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => Pago.Rehidratar(
+                Guid.CreateVersion7(),
+                Guid.CreateVersion7(),
+                new FechaContrato(DateTime.UtcNow.AddDays(1)),
+                10,
+                EstadoConcepto.Inicio,
+                null!
+                ));
         }
     }
 }

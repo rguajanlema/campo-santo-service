@@ -74,5 +74,36 @@ namespace campo_santo_service.Pruebas.Dominio.Entidades
             
             Assert.AreEqual(NivelPiso.SegundoPiso, nicho.Piso);
         }
+        [TestMethod]
+        public void Crear_NichoReservado_NoLanzaExcepcion()
+        {
+            var nicho = Espacio.Crear(
+                new CodigoContrato("N-0001")
+                );
+            Assert.AreEqual(EstadoEspacio.Reservado, nicho.Estado);
+        }
+        [TestMethod]
+        public void Metodo_Ocupar_NoLanzaExcepcion()
+        {
+            var nicho = Espacio.Crear(
+                new CodigoContrato("N-0001")
+                );
+
+            nicho.Ocupar();
+            
+            Assert.AreEqual(EstadoEspacio.Ocupado, nicho.Estado);
+        }
+        [TestMethod]
+        public void Metodo_Ocupar_LanzaExcepcion()
+        {
+            var nicho = Espacio.Crear(
+                new CodigoContrato("N-0001")
+                );
+
+            nicho.Ocupar();
+
+            Assert.Throws<ExcepcionDeReglaDeNegocio>(() => nicho.Ocupar());
+        }
+
     }
 }

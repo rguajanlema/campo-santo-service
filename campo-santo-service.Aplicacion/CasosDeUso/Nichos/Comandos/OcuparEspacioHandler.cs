@@ -15,16 +15,23 @@ namespace campo_santo_service.Aplicacion.CasosDeUso.Nichos.Comandos
         }
         public async Task Ejecutar(OcuparEspacioCommand command)
         {
-            var espacio = await espacioRepository.ObtenerPorId(command.EspacioId);
+            try
+            {
+                var espacio = await espacioRepository.ObtenerPorId(command.EspacioId)
+                    ?? throw new InvalidOperationException("El espacio no existe");
 
-            if (espacio is null)
-                throw new InvalidOperationException("El espacio no existe");
+                espacio.Ocupar();
 
-            espacio.Ocupar();
+                await espacioRepository.Actualizar(espacio);
 
-            await espacioRepository.Actualizar(espacio);
-
-            await unidadDeTrabajo.CommitAsync();
+                await unidadDeTrabajo.CommitAsync();    
+            }
+            catch
+            {
+                unidadDeTrabajo.Reversar();
+                throw;
+            }
+            
         }
 
 

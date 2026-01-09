@@ -4,6 +4,7 @@
     {
         Inicio,
         Finaliza,
-        Renovacion
+        Renovacion,
+        Cuota
     }
 }
